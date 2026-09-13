@@ -1,42 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Bevaron Systems — On-Demand Hardware Engineering & Operations</title>
-<meta name="description" content="Bevaron Systems helps hardware startups and OEMs design, redesign, scrub BOMs, prototype, and manufacture low-volume PCBA — without the overhead of an in-house lab." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bevaron Systems — On-Demand Hardware Engineering & Operations</title>
+  <meta name="description" content="Bevaron Systems helps hardware startups and OEMs design, redesign, scrub BOMs, prototype, and manufacture low-volume PCBA — without the overhead of an in-house lab." />
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<!-- Tailwind -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          cobalt: {
-            50: '#eef4ff', 100: '#dbe6fe', 400: '#5b8def', 500: '#2f6fed', 600: '#1f57d6', 700: '#1a46ab'
+  <!-- Tailwind CSS & Custom Config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cobalt: {
+              50: '#eef4ff', 
+              100: '#dbe6fe', 
+              400: '#5b8def', 
+              500: '#2f6fed', 
+              600: '#1f57d6', 
+              700: '#1a46ab'
+            },
+            ink: '#0d1220',
+            slateline: '#dfe4ec'
           },
-          ink: '#0d1220',
-          slateline: '#dfe4ec'
-        },
-        fontFamily: {
-          sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui'],
-          mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace']
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui'],
+            mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace']
+          }
         }
       }
     }
-  }
-</script>
+  </script>
 
-<!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-<link rel="stylesheet" href="styles.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="text-ink antialiased">
