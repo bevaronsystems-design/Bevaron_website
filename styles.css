@@ -1,41 +1,837 @@
-html { scroll-behavior: smooth; }
-body { background:#fbfcfe; }
+/* ============================================================
+   BEVARON SYSTEMS — styles.css
+   Light mode · Plus Jakarta Sans + IBM Plex Mono · cobalt accent
+   ============================================================ */
 
-/* Fine PCB trace pattern used as a subtle background texture */
+:root {
+  --ink: #0d1220;
+  --cobalt: #2f6fed;
+  --cobalt-dark: #1f57d6;
+  --slateline: #dfe4ec;
+  --paper: #fbfcfe;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body {
+  background: var(--paper);
+}
+
+::selection {
+  background: var(--cobalt);
+  color: #fff;
+}
+
+/* ---------- Subtle PCB grid texture ---------- */
 .pcb-grid {
   background-image:
-    linear-gradient(to right, rgba(13,18,32,0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(13,18,32,0.045) 1px, transparent 1px);
+    linear-gradient(to right, rgba(13, 18, 32, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(13, 18, 32, 0.045) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
-.trace-glow {
-  box-shadow: 0 0 0 1px rgba(47,111,237,0.10), 0 8px 28px -8px rgba(47,111,237,0.35);
+.trace-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
-.num-tick { font-variant-numeric: tabular-nums; }
+/* ============================================================
+   INTRO SPLASH  (white → logo → wordmark → fade out)
+   ============================================================ */
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.45s ease, visibility 0.45s ease;
+}
 
-::selection { background: #2f6fed; color: white; }
+#splash.splash-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 
-/* reveal-on-load sequence for hero only */
-.rise { opacity: 0; transform: translateY(14px); animation: rise .7s cubic-bezier(.2,.8,.2,1) forwards; }
-.rise-1 { animation-delay: .05s; }
-.rise-2 { animation-delay: .15s; }
-.rise-3 { animation-delay: .25s; }
-.rise-4 { animation-delay: .35s; }
-@keyframes rise { to { opacity: 1; transform: translateY(0); } }
+.splash-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  opacity: 0;
+  animation: splash-in 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s forwards;
+}
 
+.splash-mark {
+  width: 76px;
+  height: auto;
+  transform: scale(0.82);
+  animation: splash-mark 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s forwards;
+}
+
+.splash-wordmark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  opacity: 0;
+  animation: splash-word 0.7s ease 0.65s forwards;
+}
+
+.splash-word {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-size: 1.35rem;
+  color: var(--ink);
+}
+
+.splash-sub {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  font-size: 0.62rem;
+  color: #64748b;
+}
+
+@keyframes splash-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes splash-mark {
+  from { transform: scale(0.82); opacity: 0.4; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+@keyframes splash-word {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Reduced motion: skip the splash entirely (JS also removes it) */
 @media (prefers-reduced-motion: reduce) {
-  .rise { animation: none; opacity: 1; transform: none; }
-  html { scroll-behavior: auto; }
+  #splash {
+    display: none;
+  }
 }
 
-a, button { transition: all .18s ease; }
+/* ============================================================
+   LOGO WATERMARKS  (4–6% opacity, deliberate placements)
+   ============================================================ */
+.wm {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
 
+.wm-hero {
+  width: min(46vw, 520px);
+  top: 4%;
+  right: -7%;
+  opacity: 0.055;
+  transform: rotate(-8deg);
+}
+
+.wm-contact {
+  width: min(42vw, 460px);
+  bottom: -12%;
+  left: -6%;
+  opacity: 0.05;
+  transform: rotate(7deg);
+}
+
+.wm-legacy {
+  width: min(40vw, 440px);
+  top: -8%;
+  right: -5%;
+  opacity: 0.06;
+  transform: rotate(6deg);
+}
+
+.wm-footer {
+  width: min(38vw, 420px);
+  bottom: -18%;
+  right: -4%;
+  opacity: 0.05;
+  transform: rotate(-9deg);
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav-link {
+  position: relative;
+  padding: 0.25rem 0.1rem;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: var(--cobalt);
+  transition: width 0.2s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: var(--ink);
+}
+
+#site-nav.nav-scrolled {
+  border-bottom-color: var(--slateline);
+  box-shadow: 0 1px 0 rgba(13, 18, 32, 0.02), 0 8px 24px -18px rgba(13, 18, 32, 0.25);
+}
+
+/* ============================================================
+   EYEBROW LABELS & BADGES
+   ============================================================ */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+.eyebrow .dot {
+  width: 7px;
+  height: 7px;
+  background: var(--cobalt);
+  flex: 0 0 auto;
+}
+
+.eyebrow-dark {
+  color: #94a3b8;
+}
+
+.dot-cobalt {
+  background: var(--cobalt);
+}
+
+.eyebrow-inline {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  font-weight: 500;
+}
+
+.badge-mono {
+  display: inline-flex;
+  align-items: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: #475569;
+  border: 1px solid var(--slateline);
+  background: #fff;
+  padding: 0.28rem 0.6rem;
+  border-radius: 0.375rem;
+}
+
+.badge-mono-dark {
+  color: #93c5fd;
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.tag-mono {
+  display: inline-flex;
+  align-items: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  color: #475569;
+  border: 1px solid var(--slateline);
+  background: #fff;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+}
+
+/* ============================================================
+   CARDS — hairline borders + corner ticks
+   ============================================================ */
+.card {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--slateline);
+  border-radius: 1rem;
+}
+
+.corner-ticks::before,
+.corner-ticks::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+
+.corner-ticks::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--cobalt);
+  border-left: 2px solid var(--cobalt);
+  border-top-left-radius: 1rem;
+}
+
+.corner-ticks::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--cobalt);
+  border-right: 2px solid var(--cobalt);
+  border-bottom-right-radius: 1rem;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.925rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: 0.6rem;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn-primary {
+  background: var(--cobalt);
+  color: #fff;
+  box-shadow: 0 8px 22px -10px rgba(47, 111, 237, 0.55);
+}
+
+.btn-primary:hover {
+  background: var(--cobalt-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px -10px rgba(47, 111, 237, 0.6);
+}
+
+.btn-secondary {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--slateline);
+}
+
+.btn-secondary:hover {
+  border-color: var(--ink);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   TRUST STRIP
+   ============================================================ */
+.strip-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #334155;
+  justify-content: center;
+  text-align: center;
+}
+
+.strip-ico {
+  width: 16px;
+  height: 16px;
+  color: var(--cobalt);
+  flex: 0 0 auto;
+}
+
+/* ============================================================
+   HERO PIPELINE VISUAL
+   ============================================================ */
+.pipeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.pipeline-row {
+  display: grid;
+  grid-template-columns: 7.2rem 2.6rem 1fr;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.7rem 0.25rem;
+  border-bottom: 1px dashed var(--slateline);
+}
+
+.pipeline-row:last-child {
+  border-bottom: 0;
+}
+
+.pipe-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: #334155;
+  font-weight: 500;
+}
+
+.pipe-ico {
+  width: 2.6rem;
+  height: 1.5rem;
+  color: var(--cobalt);
+}
+
+.pipe-note {
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+/* ============================================================
+   WORKFLOW GRIDS (Solution + How We Work)
+   ============================================================ */
+.flow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 1023px) {
+  .flow-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  .flow-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.flow-step {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--slateline);
+  border-radius: 1rem;
+  padding: 1.4rem 1.3rem 1.5rem;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.flow-step:hover {
+  border-color: var(--cobalt);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px -18px rgba(13, 18, 32, 0.35);
+}
+
+.flow-step::after {
+  content: "";
+  position: absolute;
+  top: 1.55rem;
+  right: -1.25rem;
+  width: calc(1.25rem - 2px);
+  height: 1px;
+  background: var(--slateline);
+}
+
+@media (max-width: 639px) {
+  .flow-step::after {
+    display: none;
+  }
+}
+
+.flow-step:nth-child(4n)::after,
+.flow-step:last-child::after {
+  display: none;
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 0.55rem;
+  background: var(--ink);
+  color: #fff;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.flow-step h3 {
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--ink);
+}
+
+.flow-step p {
+  margin-top: 0.45rem;
+  font-size: 0.83rem;
+  line-height: 1.55;
+  color: #64748b;
+}
+
+.flow-cta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #f8fafc;
+}
+
+/* ============================================================
+   SERVICES — featured card + grid cards (injected by JS)
+   ============================================================ */
+.featured-service {
+  border-width: 1px;
+  border-color: #c3d7fd;
+  box-shadow: 0 18px 40px -30px rgba(47, 111, 237, 0.45);
+}
+
+.service-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--slateline);
+  border-radius: 1rem;
+  padding: 1.5rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+  border-color: #5b8def;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px -20px rgba(47, 111, 237, 0.5);
+}
+
+.service-ico {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 0.6rem;
+  background: #eef4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.service-ico i,
+.service-ico svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--cobalt-dark);
+}
+
+.service-card h3 {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.service-card p {
+  margin-top: 0.4rem;
+  font-size: 0.83rem;
+  line-height: 1.55;
+  color: #64748b;
+}
+
+.service-disclaimer {
+  margin-top: 0.55rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.63rem;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  color: #94a3b8;
+}
+
+/* Small-batch volume chips */
+.vol-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.7rem;
+}
+
+.vol-chip {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  padding: 0.18rem 0.45rem;
+  border-radius: 0.35rem;
+  background: #eef4ff;
+  color: #1a46ab;
+  border: 1px solid #dbe6fe;
+}
+
+/* ============================================================
+   AI BOM STATS
+   ============================================================ */
+.stat-mini {
+  border: 1px solid var(--slateline);
+  border-radius: 0.6rem;
+  padding: 0.6rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  background: #fff;
+}
+
+.stat-mini-num {
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-mini-label {
+  font-size: 0.66rem;
+  color: #94a3b8;
+  line-height: 1.3;
+}
+
+/* ============================================================
+   INDUSTRIES
+   ============================================================ */
+.ind-card {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: #fff;
+  border: 1px solid var(--slateline);
+  border-radius: 0.9rem;
+  padding: 1.05rem 1.15rem;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #1e293b;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.ind-card:hover {
+  border-color: #5b8def;
+  transform: translateY(-2px);
+}
+
+.ind-card i,
+.ind-card svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--cobalt);
+  flex: 0 0 auto;
+}
+
+/* ============================================================
+   CASE STUDIES
+   ============================================================ */
+.case-card {
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.case-card:hover {
+  border-color: #5b8def;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px -20px rgba(47, 111, 237, 0.45);
+}
+
+/* ============================================================
+   FORM
+   ============================================================ */
+.field-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.4rem;
+}
+
+.field-label .req {
+  color: var(--cobalt);
+}
+
+.field-label .opt {
+  color: #94a3b8;
+  font-weight: 500;
+  font-size: 0.72rem;
+}
+
+.field-input {
+  width: 100%;
+  border: 1px solid var(--slateline);
+  border-radius: 0.6rem;
+  background: #fff;
+  padding: 0.62rem 0.85rem;
+  font-size: 0.9rem;
+  color: var(--ink);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field-input::placeholder {
+  color: #9aa4b5;
+}
+
+.field-input:focus {
+  outline: none;
+  border-color: var(--cobalt);
+  box-shadow: 0 0 0 3px rgba(47, 111, 237, 0.15);
+}
+
+select.field-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.2rem;
+}
+
+.field-input[aria-invalid="true"] {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+
+.dropzone {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  border: 1px dashed var(--slateline);
+  border-radius: 0.6rem;
+  padding: 1rem 1rem;
+  font-size: 0.83rem;
+  color: #64748b;
+  cursor: pointer;
+  background: #fff;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.dropzone:hover,
+.dropzone.dropzone-over {
+  border-color: var(--cobalt);
+  background: #f5f8ff;
+}
+
+.form-status-ok {
+  color: #15803d;
+}
+
+.form-status-err {
+  color: #dc2626;
+}
+
+/* ============================================================
+   REVEAL ON SCROLL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero load-in (after splash) */
+.rise {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.rise-1 { animation-delay: 0.15s; }
+.rise-2 { animation-delay: 0.25s; }
+.rise-3 { animation-delay: 0.35s; }
+.rise-4 { animation-delay: 0.45s; }
+.rise-5 { animation-delay: 0.55s; }
+
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+body.splash-active .rise,
+body.splash-active .splash-pause {
+  animation-play-state: paused;
+}
+
+body.no-anim .rise {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
 .focus-ring:focus-visible {
-  outline: 2px solid #2f6fed;
+  outline: 2px solid var(--cobalt);
   outline-offset: 2px;
 }
 
-/* mobile menu */
-#mobile-menu { transition: max-height .25s ease, opacity .2s ease; }
+a,
+button {
+  transition: color 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.num-tick {
+  font-variant-numeric: tabular-nums;
+}
+
+.hidden {
+  display: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rise,
+  .reveal {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .flow-step:hover,
+  .service-card:hover,
+  .ind-card:hover,
+  .case-card:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    transform: none;
+  }
+}
