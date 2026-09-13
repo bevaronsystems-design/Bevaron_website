@@ -1,628 +1,1016 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bevaron Systems — On-Demand Hardware Engineering & Operations</title>
-  <meta name="description" content="Bevaron Systems helps hardware startups and OEMs design, redesign, scrub BOMs, prototype, and manufacture low-volume PCBA — without the overhead of an in-house lab." />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Bevaron Systems — End-to-End Hardware Engineering, PCB Design & Electronics Manufacturing</title>
+<meta name="description" content="Bevaron Systems is your outsourced hardware engineering and operations team. We design, source, prototype, manufacture, test and support electronic products — from PCB design and redesign to PCBA, BOM optimization, component sourcing and legacy PCB redesign." />
+<link rel="canonical" href="https://bevaronsystems.com/" />
+<meta name="theme-color" content="#ffffff" />
+<link rel="icon" type="image/png" href="assets/logo_mark.png" />
 
-  <!-- Tailwind CSS & Custom Config -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            cobalt: {
-              50: '#eef4ff', 
-              100: '#dbe6fe', 
-              400: '#5b8def', 
-              500: '#2f6fed', 
-              600: '#1f57d6', 
-              700: '#1a46ab'
-            },
-            ink: '#0d1220',
-            slateline: '#dfe4ec'
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Bevaron Systems — From Electronic Idea to Production" />
+<meta property="og:description" content="Your outsourced hardware engineering and operations team. We design, source, prototype, manufacture, test and support electronic products for companies around the world." />
+<meta property="og:url" content="https://bevaronsystems.com/" />
+<meta property="og:image" content="assets/Bevaron_Systems.png" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- Tailwind via CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          cobalt: {
+            50: '#eef4ff', 100: '#dbe6fe', 200: '#c3d7fd',
+            400: '#5b8def', 500: '#2f6fed', 600: '#1f57d6', 700: '#1a46ab'
           },
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui'],
-            mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace']
-          }
+          ink: '#0d1220',
+          slateline: '#dfe4ec'
+        },
+        fontFamily: {
+          sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace']
         }
       }
     }
-  </script>
+  }
+</script>
 
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Lucide icons -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
-  <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css" />
 </head>
-
 <body class="text-ink antialiased">
 
-<!-- ========================= NAV ========================= -->
-<header class="sticky top-0 z-50 bg-white/85 backdrop-blur border-b border-slateline">
+<!-- ============================================================
+     INTRO SPLASH
+============================================================ -->
+<div id="splash" aria-hidden="true">
+  <div class="splash-inner">
+    <img src="assets/logo_mark.png" alt="" class="splash-mark" />
+    <div class="splash-wordmark">
+      <span class="splash-word">BEVARON</span>
+      <span class="splash-sub">SYSTEMS</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     NAV
+============================================================ -->
+<header id="site-nav" class="fixed top-0 inset-x-0 z-40 bg-white/90 backdrop-blur border-b border-transparent transition-colors">
   <div class="max-w-7xl mx-auto px-5 sm:px-8">
     <div class="h-16 flex items-center justify-between">
 
-      <!-- Logo -->
-      <a href="#top" class="flex items-center gap-2.5 focus-ring rounded">
-        <img src="/assets/logo_mark.png" alt="Bevaron Systems" class="h-7 w-auto" />
+      <a href="#top" class="flex items-center gap-2.5 focus-ring rounded" aria-label="Bevaron Systems — home">
+        <img src="assets/logo_mark.png" alt="" class="h-7 w-auto" />
         <span class="leading-none">
           <span class="block font-extrabold tracking-tight text-[15px]">BEVARON</span>
-          <span class="block text-[9px] tracking-[0.25em] text-slate-500 font-medium">SYSTEMS</span>
+          <span class="block text-[9px] tracking-[0.28em] text-slate-500 font-semibold">SYSTEMS</span>
         </span>
       </a>
 
-      <!-- Center links -->
-      <nav class="hidden lg:flex items-center gap-8 text-[14.5px] font-medium text-slate-600">
-        <a href="#services" class="hover:text-ink focus-ring rounded">Services</a>
-        <a href="#solutions" class="hover:text-ink focus-ring rounded">Solutions</a>
-        <a href="#lab" class="hover:text-ink focus-ring rounded">Capabilities</a>
-        <a href="#process" class="hover:text-ink focus-ring rounded">Process</a>
-        <a href="#hardware-lab" class="hover:text-ink focus-ring rounded">Hardware Lab</a>
-        <a href="#pricing" class="hover:text-ink focus-ring rounded">Pricing</a>
+      <nav class="hidden lg:flex items-center gap-7 text-[14.5px] font-medium text-slate-600" aria-label="Primary">
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#industries" class="nav-link">Industries</a>
+        <a href="#how-we-work" class="nav-link">How We Work</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#about" class="nav-link">About</a>
       </nav>
 
-      <!-- Right CTA -->
       <div class="flex items-center gap-3">
-        <a href="#audit" class="hidden sm:inline-flex items-center gap-1.5 bg-ink text-white text-[14px] font-semibold px-4 py-2.5 rounded-lg hover:bg-cobalt-600 focus-ring">
-          Book a Hardware Audit
+        <a href="#contact" class="hidden sm:inline-flex items-center gap-1.5 bg-cobalt-500 text-white text-[14px] font-semibold px-4 py-2.5 rounded-lg hover:bg-cobalt-600 focus-ring">
+          Start a Hardware Project
           <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
         </a>
-        <button id="menu-btn" class="lg:hidden p-2 -mr-2 focus-ring rounded" aria-label="Open menu" aria-expanded="false">
+        <button id="menu-btn" class="lg:hidden p-2 -mr-2 focus-ring rounded" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
           <i data-lucide="menu" class="w-6 h-6"></i>
         </button>
       </div>
     </div>
 
     <!-- Mobile menu -->
-    <div id="mobile-menu" class="lg:hidden overflow-hidden max-h-0 opacity-0 transition-all duration-300 ease-in-out">
-      <nav class="flex flex-col gap-1 pb-5 text-[15px] font-medium text-slate-700">
+    <div id="mobile-menu" class="lg:hidden overflow-hidden max-h-0 opacity-0" aria-label="Mobile navigation">
+      <nav class="flex flex-col gap-1 py-4 text-[15px] font-medium text-slate-700" aria-label="Mobile">
         <a href="#services" class="px-2 py-2.5 rounded hover:bg-slate-50">Services</a>
-        <a href="#solutions" class="px-2 py-2.5 rounded hover:bg-slate-50">Solutions</a>
-        <a href="#lab" class="px-2 py-2.5 rounded hover:bg-slate-50">Capabilities</a>
-        <a href="#process" class="px-2 py-2.5 rounded hover:bg-slate-50">Process</a>
-        <a href="#hardware-lab" class="px-2 py-2.5 rounded hover:bg-slate-50">Hardware Lab</a>
-        <a href="#pricing" class="px-2 py-2.5 rounded hover:bg-slate-50">Pricing</a>
-        <a href="#audit" class="mt-2 text-center bg-ink text-white font-semibold px-4 py-2.5 rounded-lg">Book a Hardware Audit</a>
+        <a href="#industries" class="px-2 py-2.5 rounded hover:bg-slate-50">Industries</a>
+        <a href="#how-we-work" class="px-2 py-2.5 rounded hover:bg-slate-50">How We Work</a>
+        <a href="#projects" class="px-2 py-2.5 rounded hover:bg-slate-50">Projects</a>
+        <a href="#about" class="px-2 py-2.5 rounded hover:bg-slate-50">About</a>
+        <a href="#contact" class="mt-2 text-center bg-cobalt-500 text-white font-semibold px-4 py-2.5 rounded-lg">Start a Hardware Project</a>
+        <a href="mailto:bevaronsystem@gmail.com" class="mt-1 text-center font-mono text-[12.5px] text-slate-500">bevaronsystem@gmail.com</a>
       </nav>
     </div>
   </div>
 </header>
 
-<!-- ========================= HERO ========================= -->
-<section id="top" class="relative pcb-grid overflow-hidden border-b border-slateline">
-  <div class="absolute inset-0 bg-gradient-to-b from-white via-white/40 to-transparent pointer-events-none"></div>
+<main id="top">
 
-  <div class="max-w-7xl mx-auto px-5 sm:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28 relative">
-    <div class="grid lg:grid-cols-2 gap-14 items-center">
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section id="hero" class="relative overflow-hidden border-b border-slateline pcb-grid">
+  <div class="absolute inset-0 bg-gradient-to-b from-white via-white/55 to-white/20 pointer-events-none"></div>
+  <img src="assets/logo_mark.png" alt="" class="wm wm-hero" />
+  <svg class="trace-svg" viewBox="0 0 1200 360" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#2f6fed" stroke-width="1" opacity="0.07">
+      <path d="M-20 60 H300 V140 H620 V40 H1220" />
+      <path d="M-20 300 H180 V220 H520 V330 H1220" />
+      <path d="M1050 -20 V120 H860 V250 H1220" />
+      <path d="M60 -20 V90 H240" />
+    </g>
+    <g fill="#2f6fed" opacity="0.10">
+      <circle cx="300" cy="60" r="3" /><circle cx="620" cy="140" r="3" />
+      <circle cx="180" cy="300" r="3" /><circle cx="520" cy="220" r="3" />
+      <circle cx="860" cy="250" r="3" /><circle cx="240" cy="90" r="3" />
+    </g>
+  </svg>
+
+  <div class="relative max-w-7xl mx-auto px-5 sm:px-8 pt-32 pb-20 lg:pt-40 lg:pb-24">
+    <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
 
       <div>
-        <div class="rise rise-1 inline-flex items-center gap-2 border border-slateline bg-white rounded-full px-3.5 py-1.5 text-[12.5px] font-medium text-slate-600 mb-6">
-          <span class="w-1.5 h-1.5 rounded-full bg-cobalt-500"></span>
-          Hardware Engineering & Ops, on demand
-        </div>
+        <p class="rise rise-1 eyebrow"><span class="dot"></span>OUTSOURCED HARDWARE ENGINEERING &amp; OPERATIONS · INDIA → WORLDWIDE</p>
 
-        <h1 class="rise rise-2 text-[2.5rem] leading-[1.08] sm:text-5xl sm:leading-[1.08] font-extrabold tracking-tight text-ink">
-          On-demand hardware engineering & operations as a service.
+        <h1 class="rise rise-2 mt-5 text-[2.6rem] leading-[1.06] sm:text-6xl sm:leading-[1.05] font-extrabold tracking-tight text-ink">
+          From Electronic Idea to&nbsp;Production.
         </h1>
 
-        <p class="rise rise-3 mt-5 text-[17px] leading-relaxed text-slate-600 max-w-xl">
-          Accelerate your electronics roadmap. We help startups and OEMs design, redesign, scrub BOMs, prototype, and manufacture low-volume PCBA — without the overhead of an in-house hardware lab.
+        <p class="rise rise-3 mt-6 text-[17px] leading-relaxed text-slate-600 max-w-xl">
+          We design, source, prototype, manufacture, test and support electronic products for companies around the world — through one integrated partner, from first schematic to long-term production.
         </p>
 
-        <div class="rise rise-3 mt-6 flex flex-wrap gap-2">
-          <span class="text-[12.5px] font-medium px-3 py-1.5 rounded-md bg-cobalt-50 text-cobalt-700 border border-cobalt-100">BOM Optimization</span>
-          <span class="text-[12.5px] font-medium px-3 py-1.5 rounded-md bg-cobalt-50 text-cobalt-700 border border-cobalt-100">PCB Rescue & Redesign</span>
-          <span class="text-[12.5px] font-medium px-3 py-1.5 rounded-md bg-cobalt-50 text-cobalt-700 border border-cobalt-100">Turnkey Prototyping (10–500 units)</span>
-          <span class="text-[12.5px] font-medium px-3 py-1.5 rounded-md bg-cobalt-50 text-cobalt-700 border border-cobalt-100">AI-Powered Operations</span>
-        </div>
-
         <div class="rise rise-4 mt-8 flex flex-col sm:flex-row gap-3">
-          <a href="#audit" class="inline-flex items-center justify-center gap-2 bg-cobalt-500 text-white font-semibold px-5 py-3.5 rounded-lg hover:bg-cobalt-600 trace-glow focus-ring">
-            Request a Free BOM & Lead-Time Audit
+          <a href="#contact" class="btn-primary">
+            Start a Hardware Project
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </a>
-          <a href="#services" class="inline-flex items-center justify-center gap-2 border border-slateline bg-white font-semibold px-5 py-3.5 rounded-lg hover:border-ink focus-ring">
-            Explore Engineering Services
+          <a href="#services" class="btn-secondary">
+            Explore Our Services
           </a>
         </div>
-      </div>
 
-      <!-- Visual: PCB / BOM status widget -->
-      <div class="rise rise-4">
-        <div class="bg-white border border-slateline rounded-2xl trace-glow overflow-hidden">
-          <div class="flex items-center justify-between px-5 py-3.5 border-b border-slateline bg-slate-50/70">
-            <div class="flex items-center gap-2 text-[12.5px] font-mono text-slate-500">
-              <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
-              board_rev_C.gbr
-            </div>
-            <div class="flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-slate-300"></span>
-              <span class="w-2 h-2 rounded-full bg-slate-300"></span>
-              <span class="w-2 h-2 rounded-full bg-cobalt-500"></span>
-            </div>
-          </div>
-
-          <div class="p-5 space-y-5">
-            <!-- layout preview -->
-            <svg viewBox="0 0 400 160" class="w-full h-auto rounded-lg border border-slateline bg-[#0d1220]">
-              <defs>
-                <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse">
-                  <circle cx="1" cy="1" r="1" fill="#2f6fed" opacity="0.25"/>
-                </pattern>
-              </defs>
-              <rect width="400" height="160" fill="url(#dots)"/>
-              <g stroke="#3B82F6" stroke-width="1.4" fill="none" opacity="0.85">
-                <path d="M20 30 H120 V70 H200"/>
-                <path d="M20 90 H90 V130 H260"/>
-                <path d="M260 130 V60 H340"/>
-                <path d="M200 70 V20 H340 V50"/>
-                <path d="M120 30 V10 H380"/>
-              </g>
-              <g fill="#5b8def">
-                <circle cx="120" cy="30" r="3"/>
-                <circle cx="200" cy="70" r="3"/>
-                <circle cx="260" cy="130" r="3"/>
-                <circle cx="340" cy="60" r="3"/>
-                <circle cx="90" cy="90" r="3"/>
-              </g>
-              <g fill="#e2e8f0" opacity="0.9">
-                <rect x="170" y="55" width="30" height="18" rx="2"/>
-                <rect x="300" y="40" width="24" height="24" rx="2"/>
-              </g>
-            </svg>
-
-            <!-- BOM availability -->
-            <div class="space-y-2.5">
-              <div class="flex items-center justify-between text-[13px]">
-                <span class="font-medium text-slate-600">BOM line-item availability</span>
-                <span class="font-mono text-cobalt-600 num-tick">42 / 48 in stock</span>
-              </div>
-              <div class="h-2 rounded-full bg-slate-100 overflow-hidden">
-                <div class="h-full bg-cobalt-500 rounded-full" style="width:87%"></div>
-              </div>
-              <div class="grid grid-cols-3 gap-2 pt-1">
-                <div class="border border-slateline rounded-lg px-3 py-2">
-                  <div class="text-[11px] text-slate-500">EOL parts</div>
-                  <div class="text-[15px] font-bold text-ink">3</div>
-                </div>
-                <div class="border border-slateline rounded-lg px-3 py-2">
-                  <div class="text-[11px] text-slate-500">Drop-in subs</div>
-                  <div class="text-[15px] font-bold text-cobalt-600">6</div>
-                </div>
-                <div class="border border-slateline rounded-lg px-3 py-2">
-                  <div class="text-[11px] text-slate-500">Lead time</div>
-                  <div class="text-[15px] font-bold text-ink">4.2 wk</div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="rise rise-5 mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-[12.5px] font-mono text-slate-500">
+          <span class="inline-flex items-center gap-1.5"><i data-lucide="globe-2" class="w-3.5 h-3.5 text-cobalt-600"></i>US · UK · EUROPE · AUSTRALIA</span>
+          <span class="inline-flex items-center gap-1.5"><i data-lucide="lock" class="w-3.5 h-3.5 text-cobalt-600"></i>NDA-FIRST ENGAGEMENTS</span>
+          <span class="inline-flex items-center gap-1.5"><i data-lucide="crosshair" class="w-3.5 h-3.5 text-cobalt-600"></i>SINGLE POINT OF ACCOUNTABILITY</span>
         </div>
       </div>
 
+      <!-- Progression visual: concept → schematic → PCB → prototype → manufacturing -->
+      <div class="rise rise-5 relative">
+        <div class="card corner-ticks p-6 sm:p-7">
+          <div class="flex items-center justify-between mb-5">
+            <div class="flex items-center gap-2 font-mono text-[12px] text-slate-500">
+              <i data-lucide="workflow" class="w-3.5 h-3.5"></i>
+              PROJECT PIPELINE
+            </div>
+            <span class="badge-mono">ONE WORKFLOW</span>
+          </div>
+
+          <div class="pipeline">
+            <div class="pipeline-row">
+              <span class="pipe-label">01 CONCEPT</span>
+              <svg viewBox="0 0 72 40" class="pipe-ico" aria-hidden="true"><path d="M12 20c8-10 20-10 24 0s16 10 24 0" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="36" cy="20" r="2.4" fill="currentColor"/></svg>
+              <span class="pipe-note">Block diagram &amp; requirements</span>
+            </div>
+            <div class="pipeline-row">
+              <span class="pipe-label">02 SCHEMATIC</span>
+              <svg viewBox="0 0 72 40" class="pipe-ico" aria-hidden="true"><path d="M6 20h10M22 20h8M38 20h8M54 20h12" stroke="currentColor" stroke-width="1.6"/><rect x="16" y="13" width="6" height="14" stroke="currentColor" stroke-width="1.6" fill="none"/><rect x="46" y="13" width="6" height="14" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+              <span class="pipe-note">Circuit design &amp; review</span>
+            </div>
+            <div class="pipeline-row">
+              <span class="pipe-label">03 PCB</span>
+              <svg viewBox="0 0 72 40" class="pipe-ico" aria-hidden="true"><path d="M10 8h40M10 8v24M50 8v24M10 32h40" stroke="currentColor" stroke-width="1.2" opacity=".5"/><path d="M16 14h12v12h10M28 26h16" stroke="currentColor" stroke-width="1.6" fill="none"/><rect x="30" y="12" width="12" height="8" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+              <span class="pipe-note">Layout, stackup, DFM</span>
+            </div>
+            <div class="pipeline-row">
+              <span class="pipe-label">04 PROTOTYPE</span>
+              <svg viewBox="0 0 72 40" class="pipe-ico" aria-hidden="true"><rect x="14" y="6" width="44" height="28" rx="2" stroke="currentColor" stroke-width="1.4" fill="none"/><circle cx="26" cy="20" r="5" stroke="currentColor" stroke-width="1.4" fill="none"/><rect x="38" y="14" width="12" height="12" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M14 20h7M31 20h7" stroke="currentColor" stroke-width="1.2"/></svg>
+              <span class="pipe-note">Bring-up &amp; bench validation</span>
+            </div>
+            <div class="pipeline-row">
+              <span class="pipe-label">05 MANUFACTURE</span>
+              <svg viewBox="0 0 72 40" class="pipe-ico" aria-hidden="true"><path d="M8 34V14l12 8V14l12 8V14l12 8V14l12 8v12z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/></svg>
+              <span class="pipe-note">Small-batch PCBA &amp; test</span>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-4 border-t border-slateline flex items-center justify-between">
+            <span class="font-mono text-[11.5px] text-slate-500">STATUS</span>
+            <span class="font-mono text-[11.5px] text-cobalt-600 num-tick">CONCEPT → PRODUCTION</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ========================= TRUST METRICS ========================= -->
-<section class="border-b border-slateline bg-white">
+<!-- ============================================================
+     TRUST STRIP
+============================================================ -->
+<section class="bg-white border-b border-slateline" aria-label="Capabilities overview">
   <div class="max-w-7xl mx-auto px-5 sm:px-8 py-10">
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
-      <div class="border-l-2 border-cobalt-500 pl-4">
-        <div class="text-2xl sm:text-3xl font-extrabold text-ink num-tick">60%+</div>
-        <div class="text-[13.5px] text-slate-500 mt-1 leading-snug">Average hardware engineering & ops cost savings</div>
-      </div>
-      <div class="border-l-2 border-cobalt-500 pl-4">
-        <div class="text-2xl sm:text-3xl font-extrabold text-ink num-tick">10–200</div>
-        <div class="text-[13.5px] text-slate-500 mt-1 leading-snug">Units per micro-batch prototyping & turnkey assembly run</div>
-      </div>
-      <div class="border-l-2 border-cobalt-500 pl-4">
-        <div class="text-2xl sm:text-3xl font-extrabold text-ink num-tick">100%</div>
-        <div class="text-[13.5px] text-slate-500 mt-1 leading-snug">In-house lab testing & quality control assurance</div>
-      </div>
-      <div class="border-l-2 border-cobalt-500 pl-4">
-        <div class="text-2xl sm:text-3xl font-extrabold text-ink num-tick">Zero</div>
-        <div class="text-[13.5px] text-slate-500 mt-1 leading-snug">IP risk — US/UK standard contracts & strict NDAs</div>
-      </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-7 gap-x-6">
+      <div class="strip-item"><i data-lucide="cpu" class="strip-ico"></i><span>Hardware Engineering</span></div>
+      <div class="strip-item"><i data-lucide="radar" class="strip-ico"></i><span>Component Intelligence</span></div>
+      <div class="strip-item"><i data-lucide="boxes" class="strip-ico"></i><span>Prototyping</span></div>
+      <div class="strip-item"><i data-lucide="factory" class="strip-ico"></i><span>Manufacturing</span></div>
+      <div class="strip-item"><i data-lucide="check-circle-2" class="strip-ico"></i><span>Testing</span></div>
+      <div class="strip-item"><i data-lucide="life-buoy" class="strip-ico"></i><span>Lifecycle Support</span></div>
     </div>
+    <p class="mt-9 text-center font-mono text-[12.5px] tracking-[0.14em] text-slate-500">ONE PARTNER. ONE WORKFLOW. ONE POINT OF ACCOUNTABILITY.</p>
   </div>
 </section>
 
-<!-- ========================= PROBLEM VS SOLUTION ========================= -->
-<section id="solutions" class="py-20 lg:py-28">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
-    <div class="max-w-2xl mb-12">
-      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">The problem with building a hardware team in-house.</h2>
-      <p class="mt-3 text-slate-600 text-[16px]">Most engineering teams hit the same wall. Here's how Bevaron removes it.</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-5">
-      <!-- Problem -->
-      <div class="border border-slateline rounded-2xl p-7 bg-slate-50/60">
-        <div class="flex items-center gap-2 text-slate-500 font-semibold text-[13px] mb-5">
-          <i data-lucide="triangle-alert" class="w-4 h-4"></i>
-          Without Bevaron
-        </div>
-        <ul class="space-y-4">
-          <li class="flex gap-3">
-            <i data-lucide="x" class="w-4 h-4 text-slate-400 mt-1 shrink-0"></i>
-            <span class="text-[15px] text-slate-700">Local hardware engineers cost $120k+/yr, and hiring takes months.</span>
-          </li>
-          <li class="flex gap-3">
-            <i data-lucide="x" class="w-4 h-4 text-slate-400 mt-1 shrink-0"></i>
-            <span class="text-[15px] text-slate-700">Critical components carry 40-week lead times with no visibility.</span>
-          </li>
-          <li class="flex gap-3">
-            <i data-lucide="x" class="w-4 h-4 text-slate-400 mt-1 shrink-0"></i>
-            <span class="text-[15px] text-slate-700">Contract manufacturers reject small batch runs outright.</span>
-          </li>
-          <li class="flex gap-3">
-            <i data-lucide="x" class="w-4 h-4 text-slate-400 mt-1 shrink-0"></i>
-            <span class="text-[15px] text-slate-700">Legacy boards stall on obsolete, end-of-life components.</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Solution -->
-      <div class="border border-cobalt-100 rounded-2xl p-7 bg-cobalt-50/50">
-        <div class="flex items-center gap-2 text-cobalt-700 font-semibold text-[13px] mb-5">
-          <i data-lucide="check-circle-2" class="w-4 h-4"></i>
-          With Bevaron Systems
-        </div>
-        <ul class="space-y-4">
-          <li class="flex gap-3">
-            <i data-lucide="check" class="w-4 h-4 text-cobalt-600 mt-1 shrink-0"></i>
-            <span class="text-[15px] text-ink font-medium">A dedicated engineering team, on demand — no headcount required.</span>
-          </li>
-          <li class="flex gap-3">
-            <i data-lucide="check" class="w-4 h-4 text-cobalt-600 mt-1 shrink-0"></i>
-            <span class="text-[15px] text-ink font-medium">Drop-in component sourcing that keeps your line moving.</span>
-          </li>
-          <li class="flex gap-3">
-            <i data-lucide="check" class="w-4 h-4 text-cobalt-600 mt-1 shrink-0"></i>
-            <span class="text-[15px] text-ink font-medium">Turnkey micro-batch runs from 10 to 500 units, no minimums drama.</span>
-          </li>
-          <li class="flex gap-3">
-            <i data-lucide="check" class="w-4 h-4 text-cobalt-600 mt-1 shrink-0"></i>
-            <span class="text-[15px] text-ink font-medium">Rapid hardware rescue & redesign for boards others gave up on.</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========================= SERVICES ========================= -->
-<section id="services" class="py-20 lg:py-28 bg-slate-50/60 border-y border-slateline">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
-    <div class="max-w-2xl mb-12">
-      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">Core engineering services.</h2>
-      <p class="mt-3 text-slate-600 text-[16px]">Every engagement is scoped to your board, your parts, and your deadline.</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-
-      <div class="bg-white border border-slateline rounded-2xl p-6 hover:border-cobalt-400 hover:shadow-[0_8px_24px_-8px_rgba(47,111,237,0.25)]">
-        <div class="w-10 h-10 rounded-lg bg-cobalt-50 flex items-center justify-center mb-5">
-          <i data-lucide="circuit-board" class="w-5 h-5 text-cobalt-600"></i>
-        </div>
-        <h3 class="font-bold text-[17px] text-ink mb-2">PCB Redesign & Rescue</h3>
-        <p class="text-[14.5px] text-slate-600 leading-relaxed">Re-engineering legacy boards, EOL component replacement, and 2–12 layer layout optimization.</p>
-      </div>
-
-      <div class="bg-white border border-slateline rounded-2xl p-6 hover:border-cobalt-400 hover:shadow-[0_8px_24px_-8px_rgba(47,111,237,0.25)]">
-        <div class="w-10 h-10 rounded-lg bg-cobalt-50 flex items-center justify-center mb-5">
-          <i data-lucide="list-checks" class="w-5 h-5 text-cobalt-600"></i>
-        </div>
-        <h3 class="font-bold text-[17px] text-ink mb-2">BOM Optimization & Sourcing</h3>
-        <p class="text-[14.5px] text-slate-600 leading-relaxed">Counterfeit risk reduction, drop-in replacement identification, and full lifecycle auditing.</p>
-      </div>
-
-      <div class="bg-white border border-slateline rounded-2xl p-6 hover:border-cobalt-400 hover:shadow-[0_8px_24px_-8px_rgba(47,111,237,0.25)]">
-        <div class="w-10 h-10 rounded-lg bg-cobalt-50 flex items-center justify-center mb-5">
-          <i data-lucide="factory" class="w-5 h-5 text-cobalt-600"></i>
-        </div>
-        <h3 class="font-bold text-[17px] text-ink mb-2">Turnkey Prototyping & PCBA</h3>
-        <p class="text-[14.5px] text-slate-600 leading-relaxed">Micro-batch assembly from 10–500 units, component procurement, and enclosure integration.</p>
-      </div>
-
-      <div class="bg-white border border-slateline rounded-2xl p-6 hover:border-cobalt-400 hover:shadow-[0_8px_24px_-8px_rgba(47,111,237,0.25)]">
-        <div class="w-10 h-10 rounded-lg bg-cobalt-50 flex items-center justify-center mb-5">
-          <i data-lucide="cpu" class="w-5 h-5 text-cobalt-600"></i>
-        </div>
-        <h3 class="font-bold text-[17px] text-ink mb-2">Embedded Firmware & Testing</h3>
-        <p class="text-[14.5px] text-slate-600 leading-relaxed">Board bring-up, MCU flashing, and automated functional test jig design.</p>
-      </div>
-
-      <div class="bg-white border border-slateline rounded-2xl p-6 hover:border-cobalt-400 hover:shadow-[0_8px_24px_-8px_rgba(47,111,237,0.25)]">
-        <div class="w-10 h-10 rounded-lg bg-cobalt-50 flex items-center justify-center mb-5">
-          <i data-lucide="wrench" class="w-5 h-5 text-cobalt-600"></i>
-        </div>
-        <h3 class="font-bold text-[17px] text-ink mb-2">Sustaining Hardware Operations</h3>
-        <p class="text-[14.5px] text-slate-600 leading-relaxed">Ongoing engineering support, failure analysis, and RMA management for fielded products.</p>
-      </div>
-
-      <div class="rounded-2xl p-6 bg-ink text-white flex flex-col justify-between">
-        <div>
-          <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center mb-5">
-            <i data-lucide="sparkles" class="w-5 h-5 text-cobalt-400"></i>
-          </div>
-          <h3 class="font-bold text-[17px] mb-2">Not sure where to start?</h3>
-          <p class="text-[14.5px] text-slate-300 leading-relaxed">Send us your board and we'll scope the fastest path to a working unit.</p>
-        </div>
-        <a href="#audit" class="mt-6 inline-flex items-center gap-1.5 text-[14px] font-semibold text-cobalt-400 hover:text-cobalt-300">
-          Talk to an engineer <i data-lucide="arrow-right" class="w-4 h-4"></i>
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ========================= PROCESS ========================= -->
-<section id="process" class="py-20 lg:py-28">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
-    <div class="max-w-2xl mb-14">
-      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">How it works.</h2>
-      <p class="mt-3 text-slate-600 text-[16px]">From first upload to tested hardware on your desk.</p>
-    </div>
-
-    <div class="grid md:grid-cols-4 gap-6 md:gap-4 relative">
-      <div class="hidden md:block absolute top-6 left-[12.5%] right-[12.5%] h-px bg-slateline"></div>
-
-      <div class="relative">
-        <div class="w-12 h-12 rounded-full bg-ink text-white font-mono font-semibold flex items-center justify-center mb-5 relative z-10">01</div>
-        <h3 class="font-bold text-[16px] text-ink mb-2">Upload requirements</h3>
-        <p class="text-[14.5px] text-slate-600 leading-relaxed">Send your Gerber files, schematics, or BOM securely under NDA.</p>
-      </div>
-      <div class="relative">
-        <div class="w-12 h-12 rounded-full bg-ink text-white font-mono font-semibold flex items-center justify-center mb-5 relative z-10">02</div>
-        <h3 class="font-bold text-[16px] text-ink mb-2">Engineering audit</h3>
-        <p class="text-[14.5px] text-slate-600 leading-relaxed">Our team flags risks, alternative parts, and cost cuts within 48 hours.</p>
-      </div>
-      <div class="relative">
-        <div class="w-12 h-12 rounded-full bg-ink text-white font-mono font-semibold flex items-center justify-center mb-5 relative z-10">03</div>
-        <h3 class="font-bold text-[16px] text-ink mb-2">Engineering & fabrication</h3>
-        <p class="text-[14.5px] text-slate-600 leading-relaxed">We handle design, layout, procurement, and local assembly end-to-end.</p>
-      </div>
-      <div class="relative">
-        <div class="w-12 h-12 rounded-full bg-cobalt-500 text-white font-mono font-semibold flex items-center justify-center mb-5 relative z-10">04</div>
-        <h3 class="font-bold text-[16px] text-ink mb-2">Lab testing & delivery</h3>
-        <p class="text-[14.5px] text-slate-600 leading-relaxed">100% verified, tested, and packaged hardware shipped to your door.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========================= PRICING / ENGAGEMENT ========================= -->
-<section id="pricing" class="py-20 lg:py-28 bg-slate-50/60 border-y border-slateline">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
-    <div class="max-w-2xl mb-12">
-      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">Engagement models.</h2>
-      <p class="mt-3 text-slate-600 text-[16px]">Transparent structures. No black-box invoices.</p>
-    </div>
-
-    <div class="grid lg:grid-cols-3 gap-5">
-      <div class="bg-white border border-slateline rounded-2xl p-7">
-        <div class="text-[13px] font-mono text-slate-400 mb-2">01 — PROJECT</div>
-        <h3 class="font-bold text-[19px] text-ink mb-3">Fixed-Project Execution</h3>
-        <p class="text-[14.5px] text-slate-600 leading-relaxed mb-6">Ideal for PCB redesigns, BOM audits, and single prototype runs with a defined scope and end date.</p>
-        <a href="#audit" class="text-cobalt-600 font-semibold text-[14px] inline-flex items-center gap-1.5 hover:gap-2.5">Get a scoped quote <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
-      </div>
-
-      <div class="bg-ink text-white rounded-2xl p-7 relative overflow-hidden">
-        <div class="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-cobalt-500/20 blur-2xl"></div>
-        <div class="text-[13px] font-mono text-cobalt-400 mb-2">02 — RETAINER</div>
-        <h3 class="font-bold text-[19px] mb-3">Monthly Dedicated Retainer</h3>
-        <p class="text-[14.5px] text-slate-300 leading-relaxed mb-6">Ideal for fast-growing startups needing a fractional hardware team they can call on continuously.</p>
-        <a href="#audit" class="text-cobalt-400 font-semibold text-[14px] inline-flex items-center gap-1.5 hover:gap-2.5">Discuss a retainer <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
-      </div>
-
-      <div class="bg-white border border-slateline rounded-2xl p-7">
-        <div class="text-[13px] font-mono text-slate-400 mb-2">03 — MANAGED OPS</div>
-        <h3 class="font-bold text-[19px] text-ink mb-3">Managed Micro-Batch Ops</h3>
-        <p class="text-[14.5px] text-slate-600 leading-relaxed mb-6">Turnkey procurement and PCBA coordination, billed on transparent cost-plus margins.</p>
-        <a href="#audit" class="text-cobalt-600 font-semibold text-[14px] inline-flex items-center gap-1.5 hover:gap-2.5">See how it's priced <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========================= LAB / QUALITY ========================= -->
-<section id="hardware-lab" class="py-20 lg:py-28">
+<!-- ============================================================
+     PROBLEM
+============================================================ -->
+<section id="problem" class="py-20 lg:py-28 scroll-mt-20">
   <div class="max-w-7xl mx-auto px-5 sm:px-8">
     <div class="grid lg:grid-cols-2 gap-14 items-start">
 
       <div>
-        <h2 id="lab" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink scroll-mt-24">The lab behind every board.</h2>
-        <p class="mt-3 text-slate-600 text-[16px] max-w-lg">Every unit that ships passes through the same verification pipeline, regardless of order size.</p>
-
-        <div class="mt-8 grid sm:grid-cols-2 gap-4">
-          <div class="flex gap-3 border border-slateline rounded-xl p-4">
-            <i data-lucide="scan-eye" class="w-5 h-5 text-cobalt-600 mt-0.5 shrink-0"></i>
-            <div>
-              <div class="font-semibold text-[14.5px] text-ink">Visual AOI</div>
-              <div class="text-[13px] text-slate-500">Automated optical inspection on every panel</div>
-            </div>
-          </div>
-          <div class="flex gap-3 border border-slateline rounded-xl p-4">
-            <i data-lucide="scan" class="w-5 h-5 text-cobalt-600 mt-0.5 shrink-0"></i>
-            <div>
-              <div class="font-semibold text-[14.5px] text-ink">X-ray for BGAs</div>
-              <div class="text-[13px] text-slate-500">Hidden-joint inspection under fine-pitch parts</div>
-            </div>
-          </div>
-          <div class="flex gap-3 border border-slateline rounded-xl p-4">
-            <i data-lucide="zap" class="w-5 h-5 text-cobalt-600 mt-0.5 shrink-0"></i>
-            <div>
-              <div class="font-semibold text-[14.5px] text-ink">Power-on test jigs</div>
-              <div class="text-[13px] text-slate-500">Custom fixtures per board revision</div>
-            </div>
-          </div>
-          <div class="flex gap-3 border border-slateline rounded-xl p-4">
-            <i data-lucide="thermometer" class="w-5 h-5 text-cobalt-600 mt-0.5 shrink-0"></i>
-            <div>
-              <div class="font-semibold text-[14.5px] text-ink">Thermal imaging</div>
-              <div class="text-[13px] text-slate-500">Hotspot detection under load</div>
-            </div>
-          </div>
-          <div class="flex gap-3 border border-slateline rounded-xl p-4 sm:col-span-2">
-            <i data-lucide="shield-check" class="w-5 h-5 text-cobalt-600 mt-0.5 shrink-0"></i>
-            <div>
-              <div class="font-semibold text-[14.5px] text-ink">Pre-compliance testing support</div>
-              <div class="text-[13px] text-slate-500">Early EMI/EMC checks before formal certification</div>
-            </div>
-          </div>
+        <p class="eyebrow"><span class="dot"></span>THE PROBLEM</p>
+        <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">
+          Hardware development shouldn't require managing ten different vendors.
+        </h2>
+        <p class="mt-4 text-slate-600 text-[16px] leading-relaxed">
+          A typical electronics project touches a design house, a distributor, a fab, an assembler, a test lab and a logistics partner — each with separate quotes, timelines and blind spots. When something slips, everyone points elsewhere.
+        </p>
+        <div class="mt-8 card corner-ticks p-6 bg-white">
+          <p class="eyebrow-inline">THE BEVARON POSITION</p>
+          <p class="mt-3 text-[15.5px] text-ink leading-relaxed">
+            Bevaron Systems is the single coordinated partner across that whole chain. We own the engineering, sourcing, quality and delivery — so you work with one capable hardware company, not a crowd of vendors.
+          </p>
+          <a href="#how-we-work" class="mt-4 inline-flex items-center gap-1.5 text-[14px] font-semibold text-cobalt-600 hover:gap-2.5 transition-all">
+            See how we work <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
         </div>
       </div>
 
-      <div class="bg-ink text-white rounded-2xl p-8">
-        <div class="flex items-center gap-2.5 mb-6">
-          <i data-lucide="lock" class="w-5 h-5 text-cobalt-400"></i>
-          <h3 class="font-bold text-[18px]">IP & security guarantee</h3>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="card p-5">
+          <i data-lucide="shuffle" class="w-5 h-5 text-slate-400 mb-3"></i>
+          <h3 class="font-bold text-[15px] text-ink">Fragmented accountability</h3>
+          <p class="mt-1.5 text-[13.5px] text-slate-600 leading-relaxed">Five vendors, five schedules, no single owner when something slips.</p>
         </div>
-        <ul class="space-y-4">
-          <li class="flex gap-3">
-            <i data-lucide="check" class="w-4 h-4 text-cobalt-400 mt-1 shrink-0"></i>
-            <span class="text-[14.5px] text-slate-300">SOC 2–aligned data storage across every engagement</span>
-          </li>
-          <li class="flex gap-3">
-            <i data-lucide="check" class="w-4 h-4 text-cobalt-400 mt-1 shrink-0"></i>
-            <span class="text-[14.5px] text-slate-300">Isolated schematic vaults per client, no shared access</span>
-          </li>
-          <li class="flex gap-3">
-            <i data-lucide="check" class="w-4 h-4 text-cobalt-400 mt-1 shrink-0"></i>
-            <span class="text-[14.5px] text-slate-300">Full work-for-hire legal IP transfer on every deliverable</span>
-          </li>
-          <li class="flex gap-3">
-            <i data-lucide="check" class="w-4 h-4 text-cobalt-400 mt-1 shrink-0"></i>
-            <span class="text-[14.5px] text-slate-300">US/UK standard contracts and strict mutual NDAs</span>
-          </li>
-        </ul>
-        <div class="mt-8 pt-6 border-t border-white/10 text-[13px] text-slate-400">
-          Documentation and sample agreements available on request.
+        <div class="card p-5">
+          <i data-lucide="repeat" class="w-5 h-5 text-slate-400 mb-3"></i>
+          <h3 class="font-bold text-[15px] text-ink">Specification drift</h3>
+          <p class="mt-1.5 text-[13.5px] text-slate-600 leading-relaxed">Requirements get re-explained — and re-interpreted — at every handoff.</p>
+        </div>
+        <div class="card p-5">
+          <i data-lucide="search-x" class="w-5 h-5 text-slate-400 mb-3"></i>
+          <h3 class="font-bold text-[15px] text-ink">Zero visibility</h3>
+          <p class="mt-1.5 text-[13.5px] text-slate-600 leading-relaxed">Little visibility into sourcing, lead times and production status until it's too late.</p>
+        </div>
+        <div class="card p-5">
+          <i data-lucide="triangle-alert" class="w-5 h-5 text-slate-400 mb-3"></i>
+          <h3 class="font-bold text-[15px] text-ink">Obsolete parts &amp; long lead times</h3>
+          <p class="mt-1.5 text-[13.5px] text-slate-600 leading-relaxed">EOL components stall builds; nobody is watching the supply chain early enough.</p>
+        </div>
+        <div class="card p-5 sm:col-span-2">
+          <i data-lucide="layers" class="w-5 h-5 text-slate-400 mb-3"></i>
+          <h3 class="font-bold text-[15px] text-ink">Documentation gaps</h3>
+          <p class="mt-1.5 text-[13.5px] text-slate-600 leading-relaxed">Missing design files, test records and build history make every future revision harder.</p>
+        </div>
+        <div class="card p-5 sm:col-span-2">
+          <i data-lucide="package-x" class="w-5 h-5 text-slate-400 mb-3"></i>
+          <h3 class="font-bold text-[15px] text-ink">No small-batch option</h3>
+          <p class="mt-1.5 text-[13.5px] text-slate-600 leading-relaxed">Most factories want thousands of units; prototypes and pilot runs fall through the cracks.</p>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ========================= LEAD FORM ========================= -->
-<section id="audit" class="py-20 lg:py-28 bg-slate-50/60 border-t border-slateline">
-  <div class="max-w-5xl mx-auto px-5 sm:px-8">
-    <div class="grid lg:grid-cols-5 gap-10 items-start">
+<!-- ============================================================
+     SOLUTION / WORKFLOW (7 steps)
+============================================================ -->
+<section id="workflow" class="py-20 lg:py-28 bg-slate-50/70 border-y border-slateline scroll-mt-20">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="max-w-2xl">
+      <p class="eyebrow"><span class="dot"></span>THE SOLUTION</p>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">One coordinated workflow, end to end.</h2>
+      <p class="mt-4 text-slate-600 text-[16px]">Every project runs the same disciplined path: Understand → Engineer → Source → Prototype → Build → Verify → Support. One point of contact, one plan, one accountable team.</p>
+    </div>
 
-      <div class="lg:col-span-2">
-        <h2 class="text-3xl font-extrabold tracking-tight text-ink">Got a backordered component or obsolete board?</h2>
-        <p class="mt-3 text-slate-600 text-[15.5px] leading-relaxed">Tell us what you're working with. A hardware engineer reviews every submission and responds within 48 hours.</p>
+    <div class="mt-14 flow-grid">
+      <div class="flow-step">
+        <span class="step-num">01</span>
+        <h3>Understand</h3>
+        <p>Requirements, constraints, target cost and timeline — captured and confirmed.</p>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">02</span>
+        <h3>Engineer</h3>
+        <p>Schematics, PCB layout, firmware and design reviews with your team.</p>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">03</span>
+        <h3>Source</h3>
+        <p>Components vetted for availability, lifecycle status and counterfeit risk.</p>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">04</span>
+        <h3>Prototype</h3>
+        <p>Fast turns, bring-up, debug and iteration until the board behaves.</p>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">05</span>
+        <h3>Build</h3>
+        <p>Controlled small-batch manufacturing with inspected, documented quality.</p>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">06</span>
+        <h3>Verify</h3>
+        <p>Functional testing, QC and pre-shipment verification on every unit.</p>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">07</span>
+        <h3>Support</h3>
+        <p>Sustaining engineering, revisions and lifecycle management after launch.</p>
+      </div>
+      <div class="flow-cta card corner-ticks p-6">
+        <h3 class="font-bold text-[16px] text-ink">Take step 01 with us.</h3>
+        <p class="mt-1.5 text-[13.5px] text-slate-600">Tell us about your board, BOM or idea — we'll respond with a technical assessment.</p>
+        <a href="#contact" class="mt-4 inline-flex items-center gap-1.5 text-[14px] font-semibold text-cobalt-600 hover:gap-2.5 transition-all">Start a project <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="mt-8 space-y-4">
-          <div class="flex items-center gap-3 text-[14px] text-slate-600">
-            <i data-lucide="clock" class="w-4 h-4 text-cobalt-600"></i>
-            48-hour technical review, every time
-          </div>
-          <div class="flex items-center gap-3 text-[14px] text-slate-600">
-            <i data-lucide="file-lock-2" class="w-4 h-4 text-cobalt-600"></i>
-            Files handled under NDA
-          </div>
-          <div class="flex items-center gap-3 text-[14px] text-slate-600">
-            <i data-lucide="mail" class="w-4 h-4 text-cobalt-600"></i>
-            hello@bevaronsystems.com
+<!-- ============================================================
+     SERVICES
+============================================================ -->
+<section id="services" class="py-20 lg:py-28 scroll-mt-16">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="max-w-2xl">
+      <p class="eyebrow"><span class="dot"></span>SERVICES</p>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">One team for the full electronics lifecycle.</h2>
+      <p class="mt-4 text-slate-600 text-[16px]">From a new schematic to a 10-year-old controller that must keep running — the same engineering team handles it.</p>
+    </div>
+
+    <!-- Featured: PCB Rescue & Obsolescence Management -->
+    <div class="mt-12 featured-service card corner-ticks overflow-hidden">
+      <div class="grid lg:grid-cols-2">
+        <div class="p-8 sm:p-10">
+          <span class="badge-mono">FEATURED</span>
+          <h3 class="mt-4 text-2xl sm:text-[1.75rem] font-extrabold tracking-tight text-ink">Keep legacy hardware alive</h3>
+          <p class="mt-3 text-[15.5px] text-slate-600 leading-relaxed">
+            When a critical board fails or its parts go end-of-life, replacing the machine usually isn't an option. We recover, redesign and reproduce legacy electronics — reviving the schematic, re-sourcing parts, and delivering new boards built to the original function.
+          </p>
+          <a href="#legacy" class="mt-6 inline-flex items-center gap-1.5 text-[14px] font-semibold text-cobalt-600 hover:gap-2.5 transition-all">
+            Learn about legacy recovery <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+        <div class="p-8 sm:p-10 lg:border-l border-slateline bg-slate-50/60">
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <i data-lucide="file-search" class="w-[18px] h-[18px] text-cobalt-600 mt-0.5"></i>
+              <p class="text-[14px] text-slate-700"><span class="font-semibold text-ink">Schematic recovery</span> — rebuild design intent from physical boards or partial files.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <i data-lucide="git-merge" class="w-[18px] h-[18px] text-cobalt-600 mt-0.5"></i>
+              <p class="text-[14px] text-slate-700"><span class="font-semibold text-ink">Form-fit-function redesign</span> — modern equivalents, same mechanical envelope.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <i data-lucide="search" class="w-[18px] h-[18px] text-cobalt-600 mt-0.5"></i>
+              <p class="text-[14px] text-slate-700"><span class="font-semibold text-ink">EOL part substitution</span> — drop-in or re-engineered alternatives, verified on the bench.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <i data-lucide="hard-drive" class="w-[18px] h-[18px] text-cobalt-600 mt-0.5"></i>
+              <p class="text-[14px] text-slate-700"><span class="font-semibold text-ink">Documentation package</span> — schematics, BOM, Gerbers and test records for the future.</p>
+            </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <form class="lg:col-span-3 bg-white border border-slateline rounded-2xl p-6 sm:p-8 space-y-5" onsubmit="return handleSubmit(event)">
+    <!-- Full service grid -->
+    <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="services-grid">
+      <!-- Cards injected by script.js -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     AI & AUTOMATION
+============================================================ -->
+<section id="ai" class="py-20 lg:py-28 bg-slate-50/70 border-y border-slateline scroll-mt-16">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="grid lg:grid-cols-2 gap-14 items-start">
+      <div>
+        <p class="eyebrow"><span class="dot"></span>AI &amp; AUTOMATION</p>
+        <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">Engineering, accelerated by AI.</h2>
+        <p class="mt-4 text-slate-600 text-[16px] leading-relaxed">
+          We use AI where it genuinely speeds hardware work: scanning BOMs for risk, drafting documentation, and automating routine coordination — always under the direction of qualified engineers.
+        </p>
+        <div class="mt-8 card corner-ticks p-6 bg-white border-l-2 border-l-cobalt-500">
+          <i data-lucide="shield-check" class="w-5 h-5 text-cobalt-600"></i>
+          <p class="mt-3 text-[15px] text-ink font-medium leading-relaxed">AI assists our engineers. Critical engineering decisions remain under qualified human review.</p>
+        </div>
+      </div>
+
+      <div class="space-y-5">
+        <!-- AI BOM Intelligence visual -->
+        <div class="card corner-ticks p-6">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 font-mono text-[12px] text-slate-500">
+              <i data-lucide="scan-line" class="w-3.5 h-3.5"></i> AI BOM INTELLIGENCE
+            </div>
+            <span class="badge-mono">BOM HEALTH SCORE</span>
+          </div>
+
+          <div class="mt-6 flex items-end gap-5">
+            <div>
+              <div class="flex items-baseline">
+                <span class="text-5xl font-extrabold num-tick text-ink">87</span>
+                <span class="text-xl font-bold text-slate-400 num-tick">/100</span>
+              </div>
+              <div class="mt-1 font-mono text-[11px] text-slate-500">SAMPLE REPORT</div>
+            </div>
+            <div class="flex-1 pb-1">
+              <div class="h-2.5 rounded-full bg-slate-100 overflow-hidden">
+                <div class="h-full bg-cobalt-500 rounded-full" style="width:87%"></div>
+              </div>
+              <div class="mt-2 flex justify-between font-mono text-[10.5px] text-slate-400">
+                <span>AT RISK</span><span>HEALTHY</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="stat-mini"><span class="stat-mini-num">2</span><span class="stat-mini-label">Obsolete parts</span></div>
+            <div class="stat-mini"><span class="stat-mini-num">38 wk</span><span class="stat-mini-label">Longest lead time</span></div>
+            <div class="stat-mini"><span class="stat-mini-num">5</span><span class="stat-mini-label">Alternatives found</span></div>
+            <div class="stat-mini"><span class="stat-mini-num">12%</span><span class="stat-mini-label">Cost reduction</span></div>
+            <div class="stat-mini"><span class="stat-mini-num">4</span><span class="stat-mini-label">Flagged risks</span></div>
+            <div class="stat-mini"><span class="stat-mini-num">46</span><span class="stat-mini-label">Lines scanned</span></div>
+            <div class="stat-mini"><span class="stat-mini-num">9</span><span class="stat-mini-label">Single-source parts</span></div>
+            <div class="stat-mini"><span class="stat-mini-num">3</span><span class="stat-mini-label">Lifecycle alerts</span></div>
+          </div>
+          <p class="mt-5 pt-4 border-t border-slateline text-[12.5px] text-slate-500">
+            Upload a BOM → AI flags obsolescence, availability, lead time, alternatives and cost → an engineer reviews every flag → you receive a BOM Health Report.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div class="card p-6">
+            <i data-lucide="file-text" class="w-5 h-5 text-cobalt-600"></i>
+            <h3 class="mt-3 font-bold text-[15.5px] text-ink">AI-assisted engineering documentation</h3>
+            <p class="mt-1.5 text-[13.5px] text-slate-600 leading-relaxed">Test reports, change records and build documentation drafted faster — and checked by engineers.</p>
+          </div>
+          <div class="card p-6">
+            <i data-lucide="workflow" class="w-5 h-5 text-cobalt-600"></i>
+            <h3 class="mt-3 font-bold text-[15.5px] text-ink">AI workflow automation</h3>
+            <p class="mt-1.5 text-[13.5px] text-slate-600 leading-relaxed">RFQ triage, support routing and customer updates handled automatically, supervised by our team.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     INDUSTRIES
+============================================================ -->
+<section id="industries" class="py-20 lg:py-28 scroll-mt-16">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="max-w-2xl">
+      <p class="eyebrow"><span class="dot"></span>INDUSTRIES</p>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">Built for teams that ship hardware.</h2>
+      <p class="mt-4 text-slate-600 text-[16px]">We work with startups, SMEs, hardware companies and industrial OEMs across the US, UK, Europe and Australia.</p>
+    </div>
+
+    <div class="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-5">
+      <div class="ind-card"><i data-lucide="wifi"></i><span>IoT &amp; Connected Devices</span></div>
+      <div class="ind-card"><i data-lucide="settings-2"></i><span>Industrial Automation</span></div>
+      <div class="ind-card"><i data-lucide="bot"></i><span>Robotics</span></div>
+      <div class="ind-card"><i data-lucide="zap"></i><span>Energy</span></div>
+      <div class="ind-card"><i data-lucide="sprout"></i><span>Agriculture Technology</span></div>
+      <div class="ind-card"><i data-lucide="car"></i><span>Automotive &amp; Mobility</span></div>
+      <div class="ind-card"><i data-lucide="smartphone"></i><span>Consumer Electronics</span></div>
+      <div class="ind-card"><i data-lucide="activity"></i><span>Medical Technology</span></div>
+      <div class="ind-card"><i data-lucide="wrench"></i><span>Legacy Industrial Equipment</span></div>
+    </div>
+    <p class="mt-6 text-[13px] text-slate-500">Medical Technology engagements are subject to applicable regulatory requirements.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     LEGACY FEATURE
+============================================================ -->
+<section id="legacy" class="py-20 lg:py-28 bg-ink text-white relative overflow-hidden scroll-mt-16">
+  <img src="assets/logo_mark_white.png" alt="" class="wm wm-legacy" />
+  <div class="relative max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+      <div>
+        <p class="eyebrow eyebrow-dark"><span class="dot dot-cobalt"></span>LEGACY ELECTRONICS</p>
+        <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight">When the original board is gone, the product doesn't have to be.</h2>
+        <p class="mt-5 text-slate-300 text-[16px] leading-relaxed">
+          Machines outlive their electronics. When a controller is discontinued, its parts are obsolete and no documentation survives, we reconstruct what's needed to keep the product running — engineering-led, and only where our customers are legally authorized to reproduce the design.
+        </p>
+        <ul class="mt-8 space-y-4">
+          <li class="flex gap-3"><i data-lucide="rotate-ccw" class="w-[18px] h-[18px] text-cobalt-400 mt-1"></i><span class="text-[15px] text-slate-200"><span class="font-semibold text-white">Obsolescence recovery</span> — source remaining life, map EOL parts, plan the bridge.</span></li>
+          <li class="flex gap-3"><i data-lucide="pencil-ruler" class="w-[18px] h-[18px] text-cobalt-400 mt-1"></i><span class="text-[15px] text-slate-200"><span class="font-semibold text-white">Redesign</span> — re-engineer the board with current components, same function and footprint.</span></li>
+          <li class="flex gap-3"><i data-lucide="printer" class="w-[18px] h-[18px] text-cobalt-400 mt-1"></i><span class="text-[15px] text-slate-200"><span class="font-semibold text-white">Reproduction</span> — rebuild and test replacement boards, delivered production-ready.</span></li>
+        </ul>
+        <div class="mt-8 card corner-ticks p-5 bg-white/5 border-white/10">
+          <p class="text-[13px] text-slate-400 leading-relaxed"><span class="font-semibold text-slate-200">Authorized work only.</span> Reverse engineering and reproduction are undertaken only where the customer holds the rights or written authorization to the design. We verify before we begin.</p>
+        </div>
+        <a href="#contact" class="mt-8 btn-primary">Talk to an Engineer <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
+      <!-- Board visual -->
+      <div class="relative">
+        <div class="rounded-2xl overflow-hidden border border-white/10 bg-[#090d17] p-5">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-[11.5px] text-slate-500">LEGACY CONTROLLER · REV B</span>
+            <span class="badge-mono badge-mono-dark">RECOVERED</span>
+          </div>
+          <svg viewBox="0 0 400 240" class="w-full h-auto" aria-hidden="true">
+            <rect width="400" height="240" rx="8" fill="#0a0f1c"/>
+            <g stroke="#1c2740" stroke-width="1"><path d="M0 40h400M0 80h400M0 120h400M0 160h400M0 200h400"/><path d="M40 0v240M80 0v240M120 0v240M160 0v240M200 0v240M240 0v240M280 0v240M320 0v240M360 0v240"/></g>
+            <g stroke="#2f6fed" stroke-width="1.2" fill="none" opacity="0.8">
+              <path d="M40 40h80v40h120v-40h120"/>
+              <path d="M40 200h120v-40h160"/>
+              <path d="M280 40v60h80"/>
+              <path d="M120 120h80"/>
+            </g>
+            <g fill="#5b8def" opacity="0.9">
+              <circle cx="120" cy="40" r="2.5"/><circle cx="240" cy="40" r="2.5"/><circle cx="360" cy="40" r="2.5"/>
+              <circle cx="160" cy="200" r="2.5"/><circle cx="320" cy="160" r="2.5"/><circle cx="280" cy="100" r="2.5"/>
+            </g>
+            <g fill="none" stroke="#94a3b8" stroke-width="1.2">
+              <rect x="180" y="90" width="56" height="40" rx="3"/>
+              <rect x="70" y="100" width="30" height="18" rx="2"/>
+              <rect x="300" y="120" width="30" height="18" rx="2"/>
+            </g>
+            <g fill="#94a3b8" opacity="0.85">
+              <circle cx="100" cy="60" r="2"/><circle cx="140" cy="70" r="2"/><circle cx="200" cy="180" r="2"/>
+              <circle cx="250" cy="170" r="2"/><circle cx="330" cy="60" r="2"/><circle cx="60" cy="160" r="2"/>
+            </g>
+          </svg>
+          <div class="mt-4 grid grid-cols-3 gap-3 font-mono text-[11px]">
+            <div class="border border-white/10 rounded-lg px-3 py-2"><div class="text-slate-500">SCHEMATIC</div><div class="text-cobalt-400 mt-0.5">REBUILT</div></div>
+            <div class="border border-white/10 rounded-lg px-3 py-2"><div class="text-slate-500">BOM</div><div class="text-cobalt-400 mt-0.5">RE-SOURCED</div></div>
+            <div class="border border-white/10 rounded-lg px-3 py-2"><div class="text-slate-500">BOARDS</div><div class="text-cobalt-400 mt-0.5">REPRODUCED</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HOW WE WORK
+============================================================ -->
+<section id="how-we-work" class="py-20 lg:py-28 scroll-mt-16">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="max-w-2xl">
+      <p class="eyebrow"><span class="dot"></span>HOW WE WORK</p>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">From first message to long-term partner.</h2>
+      <p class="mt-4 text-slate-600 text-[16px]">A structured engagement — clear scope, clear deliverables, clear ownership at every step.</p>
+    </div>
+
+    <div class="mt-14 flow-grid">
+      <div class="flow-step">
+        <span class="step-num">01</span>
+        <h3>Tell us what you need</h3>
+        <p>A short brief: the board, the BOM, the blocker — whatever you have.</p>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">02</span>
+        <h3>Technical assessment</h3>
+        <p>We review feasibility, risks and options, then respond with engineering questions — not sales questions.</p>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">03</span>
+        <h3>Proposal</h3>
+        <p>A scoped plan with deliverables, timeline and transparent pricing.</p>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">04</span>
+        <h3>Engineering</h3>
+        <p>Design, review and documentation, with checkpoints you approve.</p>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">05</span>
+        <h3>Prototype</h3>
+        <p>Build, bring-up and iteration on real hardware, reported transparently.</p>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">06</span>
+        <h3>Production</h3>
+        <p>Controlled small-batch manufacturing with inspection and full traceability.</p>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">07</span>
+        <h3>Long-term support</h3>
+        <p>Sustaining engineering, revisions, RMA and lifecycle management.</p>
+      </div>
+      <div class="flow-cta card corner-ticks p-6">
+        <h3 class="font-bold text-[16px] text-ink">Begin at step 01.</h3>
+        <p class="mt-1.5 text-[13.5px] text-slate-600">Send a short brief — a project engineer reads every inquiry.</p>
+        <a href="#contact" class="mt-4 inline-flex items-center gap-1.5 text-[14px] font-semibold text-cobalt-600 hover:gap-2.5 transition-all">Contact us <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHY US
+============================================================ -->
+<section id="why-us" class="py-20 lg:py-28 bg-slate-50/70 border-y border-slateline scroll-mt-16">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="max-w-2xl">
+      <p class="eyebrow"><span class="dot"></span>WHY BEVARON</p>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">Why companies choose Bevaron.</h2>
+      <p class="mt-4 text-slate-600 text-[16px]">Engineering-led operations, built for international hardware teams.</p>
+    </div>
+
+    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="card corner-ticks p-7">
+        <i data-lucide="git-branch" class="w-5 h-5 text-cobalt-600"></i>
+        <h3 class="mt-4 font-bold text-[16.5px] text-ink">End-to-End</h3>
+        <p class="mt-2 text-[14px] text-slate-600 leading-relaxed">Idea to production to support — one workflow, one accountable partner across the entire chain.</p>
+      </div>
+      <div class="card corner-ticks p-7">
+        <i data-lucide="cpu" class="w-5 h-5 text-cobalt-600"></i>
+        <h3 class="mt-4 font-bold text-[16.5px] text-ink">Engineering First</h3>
+        <p class="mt-2 text-[14px] text-slate-600 leading-relaxed">Decisions are made by engineers, for engineering reasons — not by middlemen reselling capacity.</p>
+      </div>
+      <div class="card corner-ticks p-7">
+        <i data-lucide="sliders-horizontal" class="w-5 h-5 text-cobalt-600"></i>
+        <h3 class="mt-4 font-bold text-[16.5px] text-ink">Flexible Manufacturing</h3>
+        <p class="mt-2 text-[14px] text-slate-600 leading-relaxed">Prototype quantities to production batches, matched to vetted partners for each process.</p>
+      </div>
+      <div class="card corner-ticks p-7">
+        <i data-lucide="globe-2" class="w-5 h-5 text-cobalt-600"></i>
+        <h3 class="mt-4 font-bold text-[16.5px] text-ink">Global Delivery</h3>
+        <p class="mt-2 text-[14px] text-slate-600 leading-relaxed">Built to serve the US, UK, Europe and Australia, with documentation and communication to match.</p>
+      </div>
+      <div class="card corner-ticks p-7">
+        <i data-lucide="sparkles" class="w-5 h-5 text-cobalt-600"></i>
+        <h3 class="mt-4 font-bold text-[16.5px] text-ink">AI-Enabled</h3>
+        <p class="mt-2 text-[14px] text-slate-600 leading-relaxed">Faster BOM intelligence, documentation and coordination — under qualified human review.</p>
+      </div>
+      <div class="card corner-ticks p-7">
+        <i data-lucide="handshake" class="w-5 h-5 text-cobalt-600"></i>
+        <h3 class="mt-4 font-bold text-[16.5px] text-ink">Long-Term Partnership</h3>
+        <p class="mt-2 text-[14px] text-slate-600 leading-relaxed">We stay with the product after launch: revisions, sourcing and lifecycle support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROJECTS / CASE STUDIES
+============================================================ -->
+<section id="projects" class="py-20 lg:py-28 scroll-mt-16">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="max-w-2xl">
+      <p class="eyebrow"><span class="dot"></span>PROJECTS</p>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">What a project with us looks like.</h2>
+      <p class="mt-4 text-slate-600 text-[16px]">Walkthroughs of representative engagements. Client identities are never disclosed.</p>
+    </div>
+
+    <div class="mt-12 grid lg:grid-cols-3 gap-5">
+      <article class="case-card card corner-ticks p-7 flex flex-col">
+        <span class="badge-mono self-start">ILLUSTRATIVE PROJECT</span>
+        <h3 class="mt-4 font-bold text-[17px] text-ink">Legacy controller redesign</h3>
+        <p class="mt-2 text-[14px] text-slate-600 leading-relaxed flex-1">
+          A discontinued industrial controller, EOL across multiple parts and no surviving design files. We recovered the schematic, re-engineered the board with current components and reproduced a verified replacement batch.
+        </p>
+        <ul class="mt-5 space-y-2 text-[13px] text-slate-600">
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cobalt-600 mt-0.5"></i>Schematic recovered via board reverse-engineering, with full IP authorization</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cobalt-600 mt-0.5"></i>Every EOL part mapped to a verified current equivalent</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cobalt-600 mt-0.5"></i>Small batch delivered with test records and documentation package</li>
+        </ul>
+      </article>
+
+      <article class="case-card card corner-ticks p-7 flex flex-col">
+        <span class="badge-mono self-start">ILLUSTRATIVE PROJECT</span>
+        <h3 class="mt-4 font-bold text-[17px] text-ink">New product prototype build</h3>
+        <p class="mt-2 text-[14px] text-slate-600 leading-relaxed flex-1">
+          A connected-device startup with a working breadboard concept. We produced the production-intent schematic, PCB layout and enclosure integration, then prototyped and debugged through two board revisions.
+        </p>
+        <ul class="mt-5 space-y-2 text-[13px] text-slate-600">
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cobalt-600 mt-0.5"></i>Two prototype iterations, each with a documented change list</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cobalt-600 mt-0.5"></i>BOM optimized for availability before the pilot build</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cobalt-600 mt-0.5"></i>Design package ready for pilot production handoff</li>
+        </ul>
+      </article>
+
+      <article class="case-card card corner-ticks p-7 flex flex-col">
+        <span class="badge-mono self-start">ILLUSTRATIVE PROJECT</span>
+        <h3 class="mt-4 font-bold text-[17px] text-ink">BOM health recovery</h3>
+        <p class="mt-2 text-[14px] text-slate-600 leading-relaxed flex-1">
+          An OEM board with aging stock and shrinking availability. We ran the full BOM health analysis, qualified alternatives and stabilized supply for continued manufacturing.
+        </p>
+        <ul class="mt-5 space-y-2 text-[13px] text-slate-600">
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cobalt-600 mt-0.5"></i>Full BOM scanned for obsolescence, lead-time and single-source risk</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cobalt-600 mt-0.5"></i>Alternatives verified for form, fit and function</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cobalt-600 mt-0.5"></i>Ongoing component intelligence for future builds</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+============================================================ -->
+<section id="about" class="py-20 lg:py-28 bg-slate-50/70 border-y border-slateline scroll-mt-16">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="grid lg:grid-cols-2 gap-14 items-start">
+      <div>
+        <p class="eyebrow"><span class="dot"></span>ABOUT</p>
+        <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">An India-based hardware partner, built for the global electronics industry.</h2>
+        <p class="mt-5 text-slate-600 text-[16px] leading-relaxed">
+          Bevaron Systems combines hardware engineering talent, a supplier and manufacturing ecosystem, disciplined project management and AI-enabled workflows into a single outsourced engineering and operations partner.
+        </p>
+        <p class="mt-4 text-slate-600 text-[16px] leading-relaxed">
+          We don't own every factory — we don't need to. We work with a vetted network of manufacturing and specialist partners while owning the customer relationship, engineering, quality control, documentation and delivery. The result feels like one capable hardware company.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-2">
+          <span class="tag-mono">END-TO-END HARDWARE ENGINEERING</span>
+          <span class="tag-mono">ELECTRONICS LIFECYCLE MANAGEMENT</span>
+          <span class="tag-mono">HARDWARE OPERATIONS</span>
+          <span class="tag-mono">ENGINEERING-LED</span>
+          <span class="tag-mono">DESIGN TO MANUFACTURING</span>
+          <span class="tag-mono">COMPONENT INTELLIGENCE</span>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div class="card corner-ticks p-6">
+          <i data-lucide="users" class="w-5 h-5 text-cobalt-600"></i>
+          <h3 class="mt-3 font-bold text-[15.5px] text-ink">Engineering talent</h3>
+          <p class="mt-1.5 text-[13.5px] text-slate-600 leading-relaxed">Hardware, embedded and test engineers working as one team on your product.</p>
+        </div>
+        <div class="card corner-ticks p-6">
+          <i data-lucide="network" class="w-5 h-5 text-cobalt-600"></i>
+          <h3 class="mt-3 font-bold text-[15.5px] text-ink">Supplier &amp; manufacturing ecosystem</h3>
+          <p class="mt-1.5 text-[13.5px] text-slate-600 leading-relaxed">A vetted partner network matched to each process, quantity and technology.</p>
+        </div>
+        <div class="card corner-ticks p-6">
+          <i data-lucide="clipboard-list" class="w-5 h-5 text-cobalt-600"></i>
+          <h3 class="mt-3 font-bold text-[15.5px] text-ink">Project management &amp; quality</h3>
+          <p class="mt-1.5 text-[13.5px] text-slate-600 leading-relaxed">Structured reviews, documented builds and inspection at every stage gate.</p>
+        </div>
+        <div class="card corner-ticks p-6">
+          <i data-lucide="sparkles" class="w-5 h-5 text-cobalt-600"></i>
+          <h3 class="mt-3 font-bold text-[15.5px] text-ink">AI-enabled workflows</h3>
+          <p class="mt-1.5 text-[13.5px] text-slate-600 leading-relaxed">Faster analysis and coordination, with engineering judgment on every decision.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+============================================================ -->
+<section id="contact" class="py-20 lg:py-28 relative overflow-hidden">
+  <img src="assets/logo_mark.png" alt="" class="wm wm-contact" />
+  <div class="relative max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="grid lg:grid-cols-5 gap-12 items-start">
+
+      <div class="lg:col-span-2">
+        <p class="eyebrow"><span class="dot"></span>CONTACT</p>
+        <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">Have a hardware problem? Let's talk.</h2>
+        <p class="mt-4 text-slate-600 text-[16px] leading-relaxed">
+          Tell us about the board, the BOM, or the product. A project engineer reviews every inquiry and responds with a technical assessment.
+        </p>
+
+        <div class="mt-8 space-y-4 text-[14.5px] text-slate-600">
+          <a href="mailto:bevaronsystem@gmail.com" class="flex items-center gap-3 hover:text-cobalt-600 focus-ring rounded">
+            <i data-lucide="mail" class="w-[18px] h-[18px] text-cobalt-600"></i>
+            <span class="font-medium">bevaronsystem@gmail.com</span>
+          </a>
+          <div class="flex items-center gap-3">
+            <i data-lucide="map-pin" class="w-[18px] h-[18px] text-cobalt-600"></i>
+            <span>India — serving clients worldwide</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <i data-lucide="clock" class="w-[18px] h-[18px] text-cobalt-600"></i>
+            <span>NDA-first engagement on request</span>
+          </div>
+        </div>
+
+        <div class="mt-8 card corner-ticks p-6 bg-white">
+          <p class="eyebrow-inline">WHAT HAPPENS NEXT</p>
+          <ol class="mt-3 space-y-2.5 text-[14px] text-slate-600 list-decimal list-inside">
+            <li>A project engineer reviews your inquiry</li>
+            <li>We respond with questions or a technical assessment</li>
+            <li>You receive a scoped proposal with deliverables and timeline</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- FORM (Netlify-ready) -->
+      <form name="project-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="inquiry-form" class="lg:col-span-3 card corner-ticks p-6 sm:p-8 space-y-5" novalidate>
+        <input type="hidden" name="form-name" value="project-inquiry" />
+        <p class="hidden" aria-hidden="true"><label>Don't fill this out: <input name="bot-field" tabindex="-1" /></label></p>
+
         <div class="grid sm:grid-cols-2 gap-5">
           <div>
-            <label for="name" class="block text-[13px] font-semibold text-slate-700 mb-1.5">Name</label>
-            <input id="name" name="name" type="text" required placeholder="Jordan Reyes"
-              class="w-full border border-slateline rounded-lg px-3.5 py-2.5 text-[14.5px] focus:outline-none focus:ring-2 focus:ring-cobalt-500 focus:border-cobalt-500" />
+            <label for="f-name" class="field-label">Name <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-name" name="name" type="text" required autocomplete="name" placeholder="Jordan Reyes" class="field-input" />
           </div>
           <div>
-            <label for="email" class="block text-[13px] font-semibold text-slate-700 mb-1.5">Work email</label>
-            <input id="email" name="email" type="email" required placeholder="jordan@company.com"
-              class="w-full border border-slateline rounded-lg px-3.5 py-2.5 text-[14.5px] focus:outline-none focus:ring-2 focus:ring-cobalt-500 focus:border-cobalt-500" />
+            <label for="f-company" class="field-label">Company <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-company" name="company" type="text" required autocomplete="organization" placeholder="Acme Hardware Co." class="field-input" />
           </div>
         </div>
 
         <div class="grid sm:grid-cols-2 gap-5">
           <div>
-            <label for="company" class="block text-[13px] font-semibold text-slate-700 mb-1.5">Company name</label>
-            <input id="company" name="company" type="text" required placeholder="Acme Hardware Co."
-              class="w-full border border-slateline rounded-lg px-3.5 py-2.5 text-[14.5px] focus:outline-none focus:ring-2 focus:ring-cobalt-500 focus:border-cobalt-500" />
+            <label for="f-email" class="field-label">Work email <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-email" name="email" type="email" required autocomplete="email" placeholder="jordan@company.com" class="field-input" />
           </div>
           <div>
-            <label for="requirement" class="block text-[13px] font-semibold text-slate-700 mb-1.5">Hardware requirement</label>
-            <select id="requirement" name="requirement" required
-              class="w-full border border-slateline rounded-lg px-3.5 py-2.5 text-[14.5px] bg-white focus:outline-none focus:ring-2 focus:ring-cobalt-500 focus:border-cobalt-500">
+            <label for="f-country" class="field-label">Country <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-country" name="country" type="text" required autocomplete="country-name" placeholder="United States" class="field-input" />
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label for="f-phone" class="field-label">Phone <span class="opt">(optional)</span></label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+1 555 000 0000" class="field-input" />
+          </div>
+          <div>
+            <label for="f-help" class="field-label">What do you need help with? <span class="req" aria-hidden="true">*</span></label>
+            <select id="f-help" name="help_with" required class="field-input">
               <option value="" disabled selected>Select one</option>
-              <option>PCB Redesign</option>
-              <option>BOM Audit</option>
-              <option>Small Batch PCBA</option>
-              <option>Custom Design</option>
+              <option>Hardware design</option>
+              <option>PCB design</option>
+              <option>PCB redesign</option>
+              <option>PCB debugging</option>
+              <option>Obsolete PCB</option>
+              <option>Reverse engineering</option>
+              <option>BOM analysis</option>
+              <option>Component sourcing</option>
+              <option>Prototype</option>
+              <option>PCBA</option>
+              <option>Manufacturing</option>
+              <option>Testing</option>
+              <option>Embedded/Firmware</option>
+              <option>Enclosure</option>
+              <option>Supply chain</option>
+              <option>RMA/Failure analysis</option>
+              <option>Other</option>
             </select>
           </div>
         </div>
-        <div>
-          <button type="submit" class="w-full bg-cobalt-500 text-white font-semibold py-3 rounded-lg hover:bg-cobalt-600 transition-colors">Submit Request</button>
+
+        <div class="grid sm:grid-cols-3 gap-5">
+          <div>
+            <label for="f-stage" class="field-label">Project stage <span class="req" aria-hidden="true">*</span></label>
+            <select id="f-stage" name="project_stage" required class="field-input">
+              <option value="" disabled selected>Select one</option>
+              <option>Idea / concept</option>
+              <option>Design in progress</option>
+              <option>Prototype stage</option>
+              <option>Ready for production</option>
+              <option>In production</option>
+              <option>Legacy / sustaining</option>
+              <option>Field failure / RMA</option>
+            </select>
+          </div>
+          <div>
+            <label for="f-qty" class="field-label">Estimated quantity <span class="opt">(optional)</span></label>
+            <input id="f-qty" name="estimated_quantity" type="text" placeholder="e.g. 10–50 units" class="field-input" />
+          </div>
+          <div>
+            <label for="f-timeline" class="field-label">Expected timeline <span class="opt">(optional)</span></label>
+            <input id="f-timeline" name="expected_timeline" type="text" placeholder="e.g. Q1 2027" class="field-input" />
+          </div>
         </div>
+
+        <div>
+          <span class="field-label" id="file-label-desc">Gerber / BOM files <span class="opt">(optional)</span></span>
+          <label for="f-file" class="dropzone" id="dropzone" aria-describedby="file-label-desc">
+            <i data-lucide="upload-cloud" class="w-5 h-5 text-slate-400"></i>
+            <span id="file-label">Drop Gerber or BOM files here, or click to browse</span>
+            <input id="f-file" name="attachment" type="file" class="sr-only" multiple
+              accept=".zip,.rar,.7z,.pdf,.xls,.xlsx,.csv,.txt,.brd,.sch,.kicad_pro,.kicad_sch,.kicad_pcb,.gbr,.gbl,.gtl,.drl" />
+          </label>
+        </div>
+
+        <div>
+          <label for="f-message" class="field-label">Message <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="f-message" name="message" rows="4" required placeholder="Tell us about your board, product, quantities or problem..." class="field-input"></textarea>
+        </div>
+
+        <div class="pt-1 flex flex-col sm:flex-row gap-3">
+          <button type="submit" class="btn-primary flex-1 justify-center" id="submit-btn">
+            Submit Project Inquiry
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+          <a href="mailto:bevaronsystem@gmail.com" class="btn-secondary flex-1 justify-center">
+            Talk to an Engineer
+          </a>
+        </div>
+
+        <p class="text-[12px] text-slate-500 leading-relaxed">
+          By submitting, you agree to be contacted about your inquiry. Files and technical details are handled confidentially.
+        </p>
+        <p id="form-status" class="text-[13.5px] font-medium text-center hidden" role="status" aria-live="polite"></p>
       </form>
     </div>
   </div>
 </section>
 
-<script>
-  // Initialize Lucide icons
-  lucide.createIcons();
+</main>
 
-  // Mobile menu toggle script
-  const menuBtn = document.getElementById('menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="relative bg-ink text-slate-300 pt-16 pb-8 overflow-hidden">
+  <img src="assets/logo_mark_white.png" alt="" class="wm wm-footer" />
+  <div class="relative max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="grid md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
 
-  if (menuBtn && mobileMenu) {
-    menuBtn.addEventListener('click', () => {
-      const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
-      
-      menuBtn.setAttribute('aria-expanded', !isExpanded);
-      
-      if (!isExpanded) {
-        mobileMenu.classList.remove('max-h-0', 'opacity-0');
-        mobileMenu.classList.add('max-h-96', 'opacity-100');
-      } else {
-        mobileMenu.classList.remove('max-h-96', 'opacity-100');
-        mobileMenu.classList.add('max-h-0', 'opacity-0');
-      }
-    });
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-2.5 mb-4">
+          <img src="assets/logo_mark_white.png" alt="Bevaron Systems logo" class="h-6 w-auto" />
+          <span class="font-extrabold tracking-tight text-white">BEVARON <span class="font-semibold tracking-[0.25em] text-slate-400 text-[11px]">SYSTEMS</span></span>
+        </div>
+        <p class="text-[14px] text-slate-400 max-w-sm leading-relaxed">From electronic idea to production. Your outsourced hardware engineering and operations team.</p>
+        <div class="mt-5 space-y-2 text-[14px]">
+          <a href="mailto:bevaronsystem@gmail.com" class="flex items-center gap-2 text-slate-400 hover:text-white focus-ring rounded w-fit">
+            <i data-lucide="mail" class="w-4 h-4"></i> bevaronsystem@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-slate-400 hover:text-white focus-ring rounded w-fit">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg> LinkedIn
+          </a>
+          <p class="flex items-center gap-2 text-slate-400"><i data-lucide="map-pin" class="w-4 h-4"></i> India</p>
+        </div>
+      </div>
 
-    // Close mobile menu on clicking any navigation link inside it
-    const mobileLinks = mobileMenu.querySelectorAll('a');
-    mobileLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        menuBtn.setAttribute('aria-expanded', 'false');
-        mobileMenu.classList.remove('max-h-96', 'opacity-100');
-        mobileMenu.classList.add('max-h-0', 'opacity-0');
-      });
-    });
-  }
+      <nav class="text-[14px]" aria-label="Footer">
+        <div class="text-[12.5px] font-semibold text-white mb-4">Company</div>
+        <ul class="space-y-2.5 text-slate-400">
+          <li><a href="#about" class="hover:text-white focus-ring rounded">About</a></li>
+          <li><a href="#how-we-work" class="hover:text-white focus-ring rounded">How We Work</a></li>
+          <li><a href="#projects" class="hover:text-white focus-ring rounded">Projects</a></li>
+          <li><a href="#why-us" class="hover:text-white focus-ring rounded">Why Us</a></li>
+          <li><a href="#contact" class="hover:text-white focus-ring rounded">Contact</a></li>
+        </ul>
+        <div class="text-[12.5px] font-semibold text-white mb-4 mt-7">Services</div>
+        <ul class="space-y-2.5 text-slate-400">
+          <li><a href="#services" class="hover:text-white focus-ring rounded">Hardware Engineering</a></li>
+          <li><a href="#services" class="hover:text-white focus-ring rounded">PCB Design &amp; Redesign</a></li>
+          <li><a href="#legacy" class="hover:text-white focus-ring rounded">Legacy Recovery</a></li>
+          <li><a href="#ai" class="hover:text-white focus-ring rounded">AI BOM Intelligence</a></li>
+          <li><a href="#contact" class="hover:text-white focus-ring rounded">Manufacturing &amp; Testing</a></li>
+        </ul>
+      </nav>
 
-  // Placeholder form submit handler
-  function handleSubmit(event) {
-    event.preventDefault();
-    alert('Thank you for reaching out! A hardware engineer will review your request.');
-    return false;
-  }
-</script>
+      <nav class="text-[14px]" aria-label="Footer secondary">
+        <div class="text-[12.5px] font-semibold text-white mb-4">Industries</div>
+        <ul class="space-y-2.5 text-slate-400">
+          <li><a href="#industries" class="hover:text-white focus-ring rounded">IoT &amp; Connected Devices</a></li>
+          <li><a href="#industries" class="hover:text-white focus-ring rounded">Industrial Automation</a></li>
+          <li><a href="#industries" class="hover:text-white focus-ring rounded">Robotics</a></li>
+          <li><a href="#industries" class="hover:text-white focus-ring rounded">Medical Technology</a></li>
+        </ul>
+        <div class="text-[12.5px] font-semibold text-white mb-4 mt-7">Resources</div>
+        <ul class="space-y-2.5 text-slate-400">
+          <li><a href="#ai" class="hover:text-white focus-ring rounded">BOM Health Reports</a></li>
+          <li><a href="#projects" class="hover:text-white focus-ring rounded">Project Walkthroughs</a></li>
+          <li><a href="#legacy" class="hover:text-white focus-ring rounded">Obsolescence Guide</a></li>
+        </ul>
+      </nav>
+    </div>
 
+    <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[13px] text-slate-500">
+      <span>© <span id="year">2026</span> Bevaron Systems. All rights reserved.</span>
+      <span class="flex items-center gap-4">
+        <a href="#" class="hover:text-white focus-ring rounded">Privacy Policy</a>
+        <span aria-hidden="true">·</span>
+        <a href="#" class="hover:text-white focus-ring rounded">Terms</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
