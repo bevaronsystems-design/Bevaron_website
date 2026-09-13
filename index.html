@@ -36,49 +36,7 @@
 <!-- Lucide Icons -->
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
-<style>
-  html { scroll-behavior: smooth; }
-  body { background:#fbfcfe; }
-
-  /* Fine PCB trace pattern used as a subtle background texture */
-  .pcb-grid {
-    background-image:
-      linear-gradient(to right, rgba(13,18,32,0.045) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(13,18,32,0.045) 1px, transparent 1px);
-    background-size: 28px 28px;
-  }
-
-  .trace-glow {
-    box-shadow: 0 0 0 1px rgba(47,111,237,0.10), 0 8px 28px -8px rgba(47,111,237,0.35);
-  }
-
-  .num-tick { font-variant-numeric: tabular-nums; }
-
-  ::selection { background: #2f6fed; color: white; }
-
-  /* reveal-on-load sequence for hero only */
-  .rise { opacity: 0; transform: translateY(14px); animation: rise .7s cubic-bezier(.2,.8,.2,1) forwards; }
-  .rise-1 { animation-delay: .05s; }
-  .rise-2 { animation-delay: .15s; }
-  .rise-3 { animation-delay: .25s; }
-  .rise-4 { animation-delay: .35s; }
-  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
-
-  @media (prefers-reduced-motion: reduce) {
-    .rise { animation: none; opacity: 1; transform: none; }
-    html { scroll-behavior: auto; }
-  }
-
-  a, button { transition: all .18s ease; }
-
-  .focus-ring:focus-visible {
-    outline: 2px solid #2f6fed;
-    outline-offset: 2px;
-  }
-
-  /* mobile menu */
-  #mobile-menu { transition: max-height .25s ease, opacity .2s ease; }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="text-ink antialiased">
@@ -90,12 +48,7 @@
 
       <!-- Logo -->
       <a href="#top" class="flex items-center gap-2.5 focus-ring rounded">
-        <!img src="images/Bevaron_Systems.png" alt="Bevaron_Systems" class="h-7 w-auto" />
-        <a href="#home" class="flex items-center">
-    <img src="images/Bevaron_Systems.png"
-         alt="Bevaron Systems"
-         class="h-9 w-auto object-contain" />
-</a>
+        <img src="assets/logo_mark.png" alt="Bevaron Systems" class="h-7 w-auto" />
         <span class="leading-none">
           <span class="block font-extrabold tracking-tight text-[15px]">BEVARON</span>
           <span class="block text-[9px] tracking-[0.25em] text-slate-500 font-medium">SYSTEMS</span>
@@ -689,40 +642,7 @@
   </div>
 </footer>
 
-<script>
-  lucide.createIcons();
-
-  // Mobile menu toggle
-  const menuBtn = document.getElementById('menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  let menuOpen = false;
-  menuBtn.addEventListener('click', () => {
-    menuOpen = !menuOpen;
-    menuBtn.setAttribute('aria-expanded', menuOpen);
-    menuBtn.innerHTML = menuOpen ? '<i data-lucide="x" class="w-6 h-6"></i>' : '<i data-lucide="menu" class="w-6 h-6"></i>';
-    mobileMenu.style.maxHeight = menuOpen ? mobileMenu.scrollHeight + 'px' : '0px';
-    mobileMenu.style.opacity = menuOpen ? '1' : '0';
-    lucide.createIcons();
-  });
-  document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', () => {
-    menuOpen = false;
-    mobileMenu.style.maxHeight = '0px';
-    mobileMenu.style.opacity = '0';
-    menuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
-    lucide.createIcons();
-  }));
-
-  // Demo form handler (no backend wired up — replace with your endpoint)
-  function handleSubmit(e) {
-    e.preventDefault();
-    const status = document.getElementById('form-status');
-    status.textContent = "Thanks — your request was received. We'll follow up within 48 hours.";
-    status.classList.remove('hidden');
-    e.target.reset();
-    document.getElementById('file-label').textContent = 'Drop a file here or click to browse';
-    return false;
-  }
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
