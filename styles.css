@@ -1,0 +1,41 @@
+html { scroll-behavior: smooth; }
+body { background:#fbfcfe; }
+
+/* Fine PCB trace pattern used as a subtle background texture */
+.pcb-grid {
+  background-image:
+    linear-gradient(to right, rgba(13,18,32,0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(13,18,32,0.045) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.trace-glow {
+  box-shadow: 0 0 0 1px rgba(47,111,237,0.10), 0 8px 28px -8px rgba(47,111,237,0.35);
+}
+
+.num-tick { font-variant-numeric: tabular-nums; }
+
+::selection { background: #2f6fed; color: white; }
+
+/* reveal-on-load sequence for hero only */
+.rise { opacity: 0; transform: translateY(14px); animation: rise .7s cubic-bezier(.2,.8,.2,1) forwards; }
+.rise-1 { animation-delay: .05s; }
+.rise-2 { animation-delay: .15s; }
+.rise-3 { animation-delay: .25s; }
+.rise-4 { animation-delay: .35s; }
+@keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
+}
+
+a, button { transition: all .18s ease; }
+
+.focus-ring:focus-visible {
+  outline: 2px solid #2f6fed;
+  outline-offset: 2px;
+}
+
+/* mobile menu */
+#mobile-menu { transition: max-height .25s ease, opacity .2s ease; }
